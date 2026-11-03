@@ -1,0 +1,13 @@
+{
+ "kind": "rerun",
+ "book": "01",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "52c755bcd019b807d46226b338797f30df18c68f",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "env": {
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "why": "SJ 第4轮统一重跑：cv sj-r4-seg 52c755b（dev 293bcdc＋#931），字形库 g4，GUJI_CORPUS_DRIFT=warn"
+}
