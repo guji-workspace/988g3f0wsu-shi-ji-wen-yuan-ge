@@ -1,0 +1,18 @@
+{
+ "kind": "rerun",
+ "book": "01",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "523efd7cbaa5e1accd44b592fd01a5c4dd5b371b",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "seed_admit",
+  "to": null
+ },
+ "base": "cv0.6.3.dev13pgbb8a3c1ed6fc-c1-g5-job407",
+ "env": {
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "why": "SJ 第10b轮：接第10轮包 cv0.6.3.dev13pgbb8a3c1ed6fc-c1-g5-job407 从 seed_admit 起重跑，cv dev 523efd7（#1041 分法不均降审收窄），字形库 g5，册配置 rev 815153，GUJI_CORPUS_DRIFT=warn"
+}
