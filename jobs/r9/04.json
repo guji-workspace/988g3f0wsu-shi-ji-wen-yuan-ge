@@ -1,0 +1,14 @@
+{
+ "kind": "rerun",
+ "book": "04",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "3bb2e40561332f0a547502731f93efd6baff2b71",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "force": true,
+ "env": {
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "why": "SJ 第9轮统一重跑：cv dev 3bb2e40（含 #1001/#1003），字形库 g4，corpus 1，册配置 rev 784462（alt_select admit、题署 formula），强制重算，GUJI_CORPUS_DRIFT=warn"
+}
