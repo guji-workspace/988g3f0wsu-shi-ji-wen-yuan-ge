@@ -1,0 +1,13 @@
+{
+ "kind": "rerun",
+ "book": "03",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "bb8a3c1ed6fc01a20797f3af655709fd58616eca",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "env": {
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "why": "SJ 第10轮统一重跑：cv dev bb8a3c1（含 #1010/#1011/#1012），字形库 g5，corpus 1，册配置 rev 813693（jiazhu_step_split），GUJI_CORPUS_DRIFT=warn"
+}
