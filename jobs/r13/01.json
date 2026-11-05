@@ -14,5 +14,5 @@
  "env": {
   "GUJI_CORPUS_DRIFT": "warn"
  },
- "why": "SJ 结构2批（S 轮，只验切分）：接借库轮 main 包 cv0.6.6-c1-g6-job835 从 row_segment 起（#1140 夹注逐步 v1.2 在 row_segment），cv v0.6.10（#1139、#1140），manager ≥0.4.12，cell_shrink inner_frame_cut/profile/only 保持 true、新开 inner_frame_keep_cross: true（切分线 11-05 核过），seed_admit 不加新键，字形库 g6，册配置 rev 待推，GUJI_CORPUS_DRIFT=warn"
+ "why": "SJ 结构2批（S 轮，只验切分）：接借库轮 main 包 cv0.6.6-c1-g6-job835 从 row_segment 起（#1140 夹注逐步 v1.2 在 row_segment），cv v0.6.10（#1139、#1140），manager ≥0.4.12，cell_shrink inner_frame_cut/profile/only 保持 true、新开 inner_frame_keep_cross: true（切分线 11-05 核过），seed_admit 不加新键，字形库 g6，册配置 rev 879930，GUJI_CORPUS_DRIFT=warn"
 }
