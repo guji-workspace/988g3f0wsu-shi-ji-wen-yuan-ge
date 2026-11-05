@@ -14,5 +14,5 @@
  "env": {
   "GUJI_CORPUS_DRIFT": "warn"
  },
- "why": "SJ 第12轮借库轮：接结构批包 cv0.6.5-c1-g5-job822-a2 从 glyph_match 起，借库改全唐文 995ejelvk0（scope human+auto, pin 1），cv v0.6.6（#1104 fold_groups [jys]），manager ≥0.4.6，册配置 rev 879306，GUJI_CORPUS_DRIFT=warn"
+ "why": "SJ 第12轮借库轮：接结构批包 cv0.6.5-c1-g5-job822-a2 从 glyph_match 起，借库改全唐文 995ejelvk0（scope human+auto, pin 1），字形库快照 g6（glyph_pin 6，glyph-daf6e6fb1a639e05），不开 fold_groups，cv v0.6.6，manager ≥0.4.6，册配置 rev 879380，GUJI_CORPUS_DRIFT=warn"
 }
