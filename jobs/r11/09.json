@@ -1,0 +1,18 @@
+{
+ "kind": "rerun",
+ "book": "09",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "391d83b41f6c51f169d8ce7184bee866da8b7289",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "row_segment",
+  "to": null
+ },
+ "base": "cv0.6.3.dev25pg523efd7cbaa5-c1-g5-job425-a2",
+ "env": {
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "why": "SJ 第11轮：接第10b轮包 cv0.6.3.dev25pg523efd7cbaa5-c1-g5-job425-a2 从 row_segment 起重跑，cv dev 391d83b（#1047 cover、#1051 夹注 v1.1、#1059 symbol_ref_gap），inner_frame_cut、symbol_ref_gap、page_kinds，字形库 g5，册配置 rev 816015，GUJI_CORPUS_DRIFT=warn"
+}
