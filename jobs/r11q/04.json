@@ -1,0 +1,18 @@
+{
+ "kind": "rerun",
+ "book": "04",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "8b48f3d256a890d051411f66baceace84b31b449",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "seed_admit",
+  "to": null
+ },
+ "base": "cv0.6.3.dev48pg391d83b41f6c-c1-g5-job452",
+ "env": {
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "why": "SJ 第11轮待裁导出：接第11轮包 cv0.6.3.dev48pg391d83b41f6c-c1-g5-job452 从 seed_admit 起重放，cv dev 8b48f3d（#1071），册配置 rev 816015 不变；只供形近线导出 llm_queue，不标 main"
+}
