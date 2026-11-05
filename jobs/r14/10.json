@@ -3,7 +3,7 @@
  "book": "10",
  "ws_glob": "988g3f0wsu-*",
  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
- "cv": "TBD",
+ "cv": "9c075e0120920fbbbb927b216354a56877dc4ad9",
  "pipeline": "keben_body_v2",
  "pages": "all",
  "steps": {
@@ -14,5 +14,5 @@
  "env": {
   "GUJI_CORPUS_DRIFT": "warn"
  },
- "why": "SJ 结构3批（S 轮，只验切分）：接结构2批包 cv0.6.10-c1-g6-job853 从 row_segment 起，cv 待 A31 发版（须含 #1149 夹注四列回归修复），manager ≥0.4.12，配置沿用 r13（cell_shrink 四个 inner_frame 开关 true），不加识别类新键，字形库 g6，册配置 rev 879930，GUJI_CORPUS_DRIFT=warn"
+ "why": "SJ 结构3批（S 轮，只验切分）：接结构2批包 cv0.6.10-c1-g6-job853 从 row_segment 起，cv v0.6.11 9c075e0（含 #1149 夹注逐步 v1.3），manager ≥0.4.12，配置沿用 r13（cell_shrink 四个 inner_frame 开关 true），不加识别类新键，字形库 g6，册配置 rev 879930，GUJI_CORPUS_DRIFT=warn"
 }
