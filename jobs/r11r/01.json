@@ -1,0 +1,18 @@
+{
+ "kind": "rerun",
+ "book": "01",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "d915b2d6c38f9369ac358b54d733d272eebb994d",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "border_detect",
+  "to": null
+ },
+ "base": "cv0.6.3.dev48pg391d83b41f6c-c1-g5-job449",
+ "env": {
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "why": "SJ 第11轮结构批：接第11轮包 cv0.6.3.dev48pg391d83b41f6c-c1-g5-job449 从 border_detect 起，cv v0.6.5（#1065 对位、#1071/#1072/#1080 待裁、#1081 抬头、#1094 skip_half），book_prompt.json 开 L3（去 men）、follow_ref_seen 收窄、内框三开关、top_weak 0.45/0.25，字形库 g5，册配置 rev 878415，GUJI_CORPUS_DRIFT=warn"
+}
