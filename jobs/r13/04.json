@@ -1,0 +1,18 @@
+{
+ "kind": "rerun",
+ "book": "04",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "4a50bedc6373c5b99ddede88785c13da8acbf3ea",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "cell_shrink",
+  "to": null
+ },
+ "base": "cv0.6.6-c1-g6-job838",
+ "env": {
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "why": "SJ 结构2批（S 轮，只验切分）：接借库轮 main 包 cv0.6.6-c1-g6-job838 从 cell_shrink 起，cv v0.6.10（#1139、#1140），manager ≥0.4.12，cell_shrink inner_frame_cut/profile/only 保持 true、新开 inner_frame_keep_cross: true（待切分线核对），seed_admit 不加新键，字形库 g6，册配置 rev 待推，GUJI_CORPUS_DRIFT=warn"
+}
