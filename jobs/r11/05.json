@@ -7,12 +7,12 @@
  "pipeline": "keben_body_v2",
  "pages": "all",
  "steps": {
-  "from": "border_detect_gate",
+  "from": "border_detect",
   "to": null
  },
  "base": "cv0.6.3.dev25pg523efd7cbaa5-c1-g5-job421",
  "env": {
   "GUJI_CORPUS_DRIFT": "warn"
  },
- "why": "SJ 第11轮：接第10b轮包 cv0.6.3.dev25pg523efd7cbaa5-c1-g5-job421 从 border_detect_gate 起重跑，cv dev 391d83b（#1047 cover、#1051 夹注 v1.1、#1059 symbol_ref_gap），inner_frame_cut、symbol_ref_gap、page_kinds，字形库 g5，册配置 rev 816015，GUJI_CORPUS_DRIFT=warn"
+ "why": "SJ 第11轮：接第10b轮包 cv0.6.3.dev25pg523efd7cbaa5-c1-g5-job421 从 border_detect 起重跑，cv dev 391d83b（#1047 cover、#1051 夹注 v1.1、#1059 symbol_ref_gap），inner_frame_cut、symbol_ref_gap、page_kinds，字形库 g5，册配置 rev 816015，GUJI_CORPUS_DRIFT=warn"
 }
