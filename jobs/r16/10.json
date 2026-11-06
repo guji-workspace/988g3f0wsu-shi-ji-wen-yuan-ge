@@ -11,5 +11,5 @@
   "to": null
  },
  "base": "cv0.6.12-c2-g6-job905",
- "why": "SJ 结构5批（r16，S 轮只验切分）：接 r15b main 包 cv0.6.12-c2-g6-job905 从 row_segment 起，cv v0.6.13 540c8f0（#1161–#1163 夹注逐步 v1.4），manager ≥0.4.12，不加识别类新键，g6，corpus 2（0.6.13 下语料未变，verify --version 2 干净），不带 DRIFT，册配置 rev 880107"
+ "why": "SJ 结构5批（r16，S 轮只验切分）：接 r15b main 包 cv0.6.12-c2-g6-job905 从 row_segment 起，cv v0.6.13 540c8f0（#1161–#1163 夹注逐步 v1.4），manager ≥0.4.12，不加识别类新键，g6，corpus 2（0.6.13 下语料未变，verify --version 2 干净），不带 DRIFT，册配置 rev 880129（核过 glyph_pin 6、skip_half、abstain_ref_ok 无 jys、corpus 2）"
 }
