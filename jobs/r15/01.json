@@ -11,8 +11,5 @@
   "to": null
  },
  "base": "cv0.6.11-c1-g6-job854",
- "env": {
-  "GUJI_CORPUS_DRIFT": "warn"
- },
- "why": "SJ 结构4批（S 轮，只验切分）：接第14轮包 cv0.6.11-c1-g6-job854 从 column_warp 起，cv 待 v0.6.13（夹注 v1.4，草稿暂钉 v0.6.12 1c6955e），manager ≥0.4.12；基础配置开 column_warp.det_warp: true、row_segment.cut_judge: unet_f64（约慢 35%）；不开 tail_one_abs、inner_frame_local；不加识别类新键；字形库 g6；语料 corpus 1 带 GUJI_CORPUS_DRIFT=warn（v2 待底库 b19）；册配置 rev 880071（切分线推：去重复开关、seg_set 与 roster_ref_* 进基础配置、det_warp＋unet_f64）"
+ "why": "SJ 结构4批（S 轮，只验切分）：接第14轮包 cv0.6.11-c1-g6-job854 从 column_warp 起，cv v0.6.12 1c6955e（#1152–#1157；夹注 v1.4 不进本批），manager ≥0.4.12；基础配置开 column_warp.det_warp: true、row_segment.cut_judge: unet_f64（约慢 35%）；不开 tail_one_abs、inner_frame_local；不加识别类新键；字形库 g6；语料 v2（底库 b19，含 02:66 改字），不带 GUJI_CORPUS_DRIFT，执行机先 db pull；册配置 rev 880080（去重复开关、seg_set 与 roster_ref_* 进基础配置、det_warp＋unet_f64、corpus 2）"
 }
