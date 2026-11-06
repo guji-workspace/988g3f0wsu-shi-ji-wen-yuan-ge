@@ -1,0 +1,15 @@
+{
+ "kind": "rerun",
+ "book": "05",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "1c6955e0499b297d52c843fa17674bb6fac99da2",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "glyph_match",
+  "to": null
+ },
+ "base": "cv0.6.12-c2-g5-job890-a2",
+ "why": "SJ 结构4批补跑（r15b）：r15 包 cv0.6.12-c2-g5-job890-a2 误用 g5（rev 880071 把 glyph_pin 带回 5），接它从 glyph_match 起、glyph_pin 改回 6（g6 glyph-daf6e6fb1a639e05，借全唐文 g1），cv v0.6.12 1c6955e，manager ≥0.4.12，corpus 2，不带 DRIFT，册配置 rev 待切分线推"
+}
