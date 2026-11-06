@@ -11,5 +11,5 @@
   "to": null
  },
  "base": "cv0.6.12-c2-g5-job889",
- "why": "SJ 结构4批补跑（r15b）：r15 包 cv0.6.12-c2-g5-job889 误用 g5（rev 880071 把 glyph_pin 带回 5），接它从 glyph_match 起、glyph_pin 改回 6（g6 glyph-daf6e6fb1a639e05，借全唐文 g1），cv v0.6.12 1c6955e，manager ≥0.4.12，corpus 2，不带 DRIFT，册配置 rev 待切分线推"
+ "why": "SJ 结构4批补跑（r15b）：r15 包 cv0.6.12-c2-g5-job889 误用 g5（rev 880071 把 glyph_pin 带回 5），接它从 glyph_match 起、glyph_pin 改回 6（g6 glyph-daf6e6fb1a639e05，借全唐文 g1），cv v0.6.12 1c6955e，manager ≥0.4.12，corpus 2，不带 DRIFT，册配置 rev 880107（glyph_pin 6、seed_admit 四键改回第14轮值），出包应为 c2-g6，执行机先 db pull"
 }
