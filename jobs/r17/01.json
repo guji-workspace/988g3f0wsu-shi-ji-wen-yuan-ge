@@ -1,0 +1,15 @@
+{
+ "kind": "rerun",
+ "book": "01",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "TBD",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "row_segment",
+  "to": null
+ },
+ "base": "cv0.6.13-c2-g6-job908",
+ "why": "SJ 切分收尾轮 r17：替换 r16 主包（含 24 处静默丢字），接 cv0.6.13-c2-g6-job908 从 row_segment 起，cv 待 A31 发版（含 #1168、#1170），manager ≥0.4.12，不加识别类新键，g6，corpus 2，不带 DRIFT，册配置 rev 880303（含 hc-fix-1104 更正）"
+}
