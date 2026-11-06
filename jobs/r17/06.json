@@ -3,7 +3,7 @@
  "book": "06",
  "ws_glob": "988g3f0wsu-*",
  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
- "cv": "TBD",
+ "cv": "86199b45d1c19b10a036ea817930df2743f11736",
  "pipeline": "keben_body_v2",
  "pages": "all",
  "steps": {
@@ -11,5 +11,5 @@
   "to": null
  },
  "base": "cv0.6.13-c2-g6-job913",
- "why": "SJ 切分收尾轮 r17：替换 r16 主包（含 24 处静默丢字），接 cv0.6.13-c2-g6-job913 从 row_segment 起，cv 待 A31 发版（含 #1168、#1170），manager ≥0.4.12，不加识别类新键，g6，corpus 2，不带 DRIFT，册配置 rev 880303（含 hc-fix-1104 更正）"
+ "why": "SJ 切分收尾轮 r17：替换 r16 主包（含 24 处静默丢字），接 cv0.6.13-c2-g6-job913 从 row_segment 起，cv v0.6.14 86199b4（含 #1168 卷端大印列、#1170 夹注逐步 v1.5 防丢字），manager ≥0.4.12，不加识别类新键，g6，corpus 2，不带 DRIFT，册配置 rev 880303（含 hc-fix-1104 更正）"
 }
