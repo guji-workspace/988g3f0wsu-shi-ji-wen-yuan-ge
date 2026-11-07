@@ -11,5 +11,5 @@
   "to": null
  },
  "base": "cv0.6.14-c2-g6-job921",
- "why": "SJ 第6轮三书同跑（r18）：接 r17 main 包 cv0.6.14-c2-g6-job921 从 glyph_match 起，cv v0.6.16（含 #1191 glyph_match knn/consensus 五键、#1205 dissent_keep/ref_pair），manager v0.4.20，册配置 rev 880820（book_defaults 加 seed_admit.edge_pair_group_seam: false 保与 r17 可比；不开 fold_*、p_ref_*），g6，corpus 2/b19，不带 DRIFT"
+ "why": "SJ 第6轮三书同跑（r18）：接 r17 main 包 cv0.6.14-c2-g6-job921 从 glyph_match 起，cv v0.6.16（含 #1191 glyph_match knn/consensus 五键、#1205 dissent_keep/ref_pair），manager v0.4.20，册配置 rev 880910（book_defaults 加 seed_admit.edge_pair_group_seam: false 保与 r17 可比；语料钉 corpus 3 = 底库 b20 + 书库 v2；不开 fold_*、p_ref_*），g6，不带 DRIFT"
 }
