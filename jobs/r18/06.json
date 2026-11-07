@@ -1,0 +1,15 @@
+{
+ "kind": "rerun",
+ "book": "06",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "TBD-v0.6.16",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "glyph_match",
+  "to": null
+ },
+ "base": "cv0.6.14-c2-g6-job923",
+ "why": "SJ 第6轮三书同跑（r18）：接 r17 main 包 cv0.6.14-c2-g6-job923 从 glyph_match 起，cv v0.6.16（含 #1191 glyph_match knn/consensus 五键、#1205 dissent_keep/ref_pair），manager v0.4.20，册配置 rev 880820（book_defaults 加 seed_admit.edge_pair_group_seam: false 保与 r17 可比；不开 fold_*、p_ref_*），g6，corpus 2/b19，不带 DRIFT"
+}
