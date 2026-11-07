@@ -1,0 +1,15 @@
+{
+ "kind": "rerun",
+ "book": "08",
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "cv": "TBD-ge-7fceb27",
+ "pipeline": "keben_body_v2",
+ "pages": "all",
+ "steps": {
+  "from": "glyph_match",
+  "to": null
+ },
+ "base": "cv0.6.16-c3-g6-r18",
+ "why": "SJ 第7轮三书同跑（r19）：接 r18 main 包 cv0.6.16-c3-g6-r18 从 glyph_match 起，cv 含 #1216（≥7fceb27），册配置 rev 881244（book_defaults：knn_k 15、knn_per_char 3、knn_per_char_top 10，共识 0.95/0.05/1，context_decide.consensus_as_unsure、seed_admit.consensus_fallback、align_ref.coord_consensus_not_same 开；edge_pair_group_seam: false 保与 r18 可比；不开 fold_*、p_ref_*），corpus 3，g6，不带 DRIFT"
+}
