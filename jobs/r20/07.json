@@ -3,7 +3,7 @@
   "book": "07",
   "ws_glob": "988g3f0wsu-*",
   "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
-  "cv": "v0.6.20",
+  "cv": "v0.6.23",
   "pipeline": "keben_body_v2",
   "pages": "all",
   "steps": {
@@ -11,5 +11,5 @@
     "to": null
   },
   "base": "cv0.6.17-c4-g6-job1038",
-  "why": "SJ 第8轮（r20）：接 r19 main 包 cv0.6.17-c4-g6（job1032…1041）从 glyph_match 起；cv v0.6.20（含 #1257、#1262、#1277），manager ≥0.4.21；册配置 rev 900368（book_defaults 在 r19 上加 p_ref 四键 max_cov 0.97/adjacent/jiazhu＋p_ref_min_cov 0.9＋p_ref_irregular_gap 0.03、group_flow_llm_half_groups [ry, jys]；宽高相关 lift_shape_ratio、fold 整组不开（Sheldon 11-08）；含 r8 合并人审表人裁、日曰己已巳文意裁定）；glyph_pin 6，corpus 4，不带 DRIFT"
+  "why": "SJ 第8轮（r20）：接 r19 main 包 cv0.6.17-c4-g6（job1032…1041）从 glyph_match 起；cv v0.6.23 b0be122（含 #1257、#1262、#1277、#1248 yr 数横默认开、#1291 seed_admit 1.82），manager ≥0.4.21；册配置 rev 912198（book_defaults 同 900368）（book_defaults 在 r19 上加 p_ref 四键 max_cov 0.97/adjacent/jiazhu＋p_ref_min_cov 0.9＋p_ref_irregular_gap 0.03、group_flow_llm_half_groups [ry, jys]；宽高相关 lift_shape_ratio、fold 整组不开（Sheldon 11-08）；含 r8 合并人审表人裁、日曰己已巳文意裁定）；glyph_pin 6，corpus 4，不带 DRIFT"
 }
