@@ -7,9 +7,9 @@
  "pipeline": "keben_body_v2",
  "pages": "all",
  "steps": {
-  "from": "glyph_match",
+  "from": "row_segment",
   "to": null
  },
  "base": "cv0.6.17-c4-g6",
- "why": "SJ 第8轮（r20）草稿：接 r19 main 包 cv0.6.17-c4-g6（job1032…1041）从 glyph_match 起；cv 待 A31 发版号（须含 #1257、#1262、#1263、#1266）；册配置 db_rev 须 ≥887159（含 A23 大→太、r8 合并人审表人裁、日曰文意裁定）；book_defaults 在 r19 上加 ry 宽高门 group_flow_lift_shape_ratio {ry:{曰:[1.2,9]}}、fold_groups [ry]／fold_ref_char false／fold_jiazhu／fold_aspect_ink／fold_aspect [0,1.2]／fold_aspect_jiazhu [0,0.95]／fold_aspect_ctx_veto 0.5／fold_lib_top_in_group；p_ref 四键＋p_ref_min_cov 0.9＋p_ref_irregular_gap 0.03 仅当 03:88:4:21b 人裁切线已入库才开，否则顺延 r9；不开 reference_trust_skip；corpus 4，g6，不带 DRIFT"
+ "why": "SJ 第8轮（r20）：接 r19 main 包 cv0.6.17-c4-g6（job1032…1041）从 row_segment 起（切分线人工定框 rev 887167：p127，整册从切分步起，不拆页）；cv 待 A31 发版号（须含 #1257、#1262、#1263、#1266）；册配置 db_rev ≥887167；book_defaults 在 r19 上加 ry 宽高门 {ry:{曰:[1.2,9]}}、fold 墨迹版（ink、[0,1.2]、夹注 [0,0.95]、ctx_veto 0.5、lib_top_in_group）、p_ref 四键（max_cov 0.97、adjacent、jiazhu）＋p_ref_min_cov 0.9＋p_ref_irregular_gap 0.03；不开 reference_trust_skip；corpus 4，g6，不带 DRIFT"
 }
