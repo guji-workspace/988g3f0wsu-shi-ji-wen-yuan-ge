@@ -1,9 +1,10 @@
 # 控制台 URL 上露出来的工作区 id（`/<ws>/<book>/step/...`）。
 # 不给就退回目录名——本仓目录名是 `<book-index id>-<书名>`，整串中文进 URL 太长，
-# 这里固定成 book ID。见 open-guji-cv `console/routers/workspace.py::_ws_id`。
+# 这里固定成短 id。见 open-guji-cv `console/routers/workspace.py::_ws_id`。
 id: 988g3f0wsu   # 工作区 id＝book ID（2026-10-28 起；短 id 长期会冲突）
 # 字形库：本书是手写本（文淵閣寫本），自己的刻例库独立入库（只收本书人裁）。
 # 冷启动借殿本（刻本）的库做匹配参考：借来的实例记 borrowed_human，只进候选，不当铁证，也不进本书真源。
 # 本书积累够了就去掉这一行。
 glyph_lib:
-  borrow: [siku-zongmu]
+  borrow:   # 11-05 改借全唐文库（同字体族；A23 A/B：首位对 79–80%，殿本只有 32%）；只降 unsure、不当证人
+    - {from: 995ejelvk0, scope: human+auto, pin: 1}   # g1 digest glyph-dc190cf561bb6642；human+auto 见 manager doc/01-开新书/借库写法.md
