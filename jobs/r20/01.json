@@ -3,7 +3,7 @@
   "book": "01",
   "ws_glob": "988g3f0wsu-*",
   "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
-  "cv": "v0.6.23",
+  "cv": "43af102e670b22e07b10607f3225e3f1cf2603fa",
   "pipeline": "keben_body_v2",
   "pages": "all",
   "steps": {
@@ -11,5 +11,5 @@
     "to": null
   },
   "base": "cv0.6.17-c4-g6-job1032",
-  "why": "SJ 第8轮（r20）：接 r19 main 包 cv0.6.17-c4-g6（job1032…1041）从 row_segment 起（切分线人工定框 rev 887167：p127，整册从切分步起，不拆页）；cv v0.6.23 b0be122（含 #1257、#1262、#1277、#1248 yr 数横默认开、#1291 seed_admit 1.82），manager ≥0.4.21；册配置 rev 912198（book_defaults 同 900368）（book_defaults 在 r19 上加 p_ref 四键 max_cov 0.97/adjacent/jiazhu＋p_ref_min_cov 0.9＋p_ref_irregular_gap 0.03、group_flow_llm_half_groups [ry, jys]；宽高相关 lift_shape_ratio、fold 整组不开（Sheldon 11-08）；含 r8 合并人审表人裁、日曰己已巳文意裁定）；glyph_pin 6，corpus 4，不带 DRIFT"
+  "why": "SJ 第8轮（r20，四层迭代第一层：只做切分，Sheldon 11-09 定）：接 r19 main 包 cv0.6.17-c4-g6-job1032，全册从 row_segment 显式起跑（人裁定框不进指纹）；cv dev 43af102（v0.6.30 后，含 #1326/#1327/#1328 书级代码，本书切分代码已搬进书仓 code/），manager ≥0.4.30；-w 须是书仓根（guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge），书配置钉 code: 1（k1＝书仓 5c06bef，k2 出后改钉）；中心库 rev ≥926722（切分线人工定框 rev 926720：manual-cells 25 条、新 20 列含两列题署；book_defaults 已撤 p_ref 六键与 group_flow_llm_half_groups，不写 fold/lift_shape）；glyph_pin 6，corpus 4，不带 DRIFT。度量看切分指标。"
 }
