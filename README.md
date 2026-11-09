@@ -23,3 +23,7 @@
 2026-11-09 起本书专属的切分代码（职名页 roster_segment／roster_glyph、雙行小注逐步切 jiazhu_step、写本参数缺省
 defaults.yaml、样页单 samples.yaml）从 open-guji-cv `books/shiji_wyg/` 搬到本仓 `code/`，有自己的版本号 `k<N>`，
 不跟 cv 一起发版。改法见 `code/README.md`。跑本书要 cv ≥0.7.0，且工作区就是本仓（`-w <本仓根>`）。
+
+书级代码打 tag（`code/` 出新版 k<N> 后）：本地 `git tag k<N> <提交> && git push origin k<N>`；云端会话走 ai-team 中转站
+`python3 process/tag.py guji-workspace/<本仓> <40 位提交号> k<N> "说明"`（只认 main 上的提交）。别改 `code/` 下已发版的文件来记这些说明——
+`code/` 里任何文件变了，钉了 `code: N` 的册起跑前就会报和 k<N> 不符。
