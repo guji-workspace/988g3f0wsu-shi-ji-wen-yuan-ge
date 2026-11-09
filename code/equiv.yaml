@@ -1,0 +1,9 @@
+# 本书登记的代码等价（cv core/book_code.py）。只增不删；之后真改了模块，等价自然失效、产物照常过期。
+# 2026-11-09 书级代码第 3 步（A20）：从 open-guji-cv books/shiji_wyg/ 搬来；只把相对 import 改成
+# open_guji_cv.seg／open_guji_cv.book_api，算法未动。搬前搬后各步 code_hash 逐位相同（L0）。
+moved:
+  roster_segment: {from: open_guji_cv.books.shiji_wyg.roster_segment, hash: a5564bb60021baadfa81234c3d92a66b2f7f0296b7a67051d18c5436d3033c0d}
+  roster_glyph: {from: open_guji_cv.books.shiji_wyg.roster_glyph, hash: 84f0636a76c93b4c74dbe25919b99100ae8dce8db18e7e41561db839d5f3ab68}
+  jiazhu_step: {from: open_guji_cv.books.shiji_wyg.jiazhu_step, hash: 941e17d3b4de9157f37c8515f28ba8f3ae681c076bc97fb121d9c690bf5af0a0}
+entries:
+  - {module: jiazhu_step, new: 8aec7f88819820ff8b68a3308796b228d7ecc1ff4c4669c143e18e63f05e86c6, old: 941e17d3b4de9157f37c8515f28ba8f3ae681c076bc97fb121d9c690bf5af0a0}
