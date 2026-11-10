@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "05",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.6.38",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.6.36-c4-g6-m2-k1-job1787",
+  "why": "SJ 第16轮（r28）：全书 10 册统一从 row_segment（Step3）起重算，与 cv v0.6.38 对齐（row_segment 1.49 修卷端题列后移、#1362 修年表页 border_detect 越界，09 册不再排除年表页；待审条目化）；接 main 包 cv0.6.36-c4-g6-m2-k1-job1787，整册；cv v0.6.38，manager ≥v0.4.35；-w 须是书仓根，code: 1（k1）；中心库 rev ≥928781；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。r27 未标 main 的包作废。"
+}
