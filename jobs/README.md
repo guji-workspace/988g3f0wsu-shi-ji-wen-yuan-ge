@@ -6,7 +6,8 @@
 - 出包后核标签、manifest 的 cv/db_rev、页失败（与年表跳页分开计）、human_chars 无报错、人工定框列格位一致。
 - 书仓 main 有新提交（尤其 code/ 改动或 k<N> 升版）要通知 Console 重置服务器上的书仓检出（11-09 旧检出缺 code/ 致控制台 500）；标 main 后通知 Console 时，除包标签外写明书仓 main 最新提交号。
 - book-text 版本记录（Sheldon 11-10 定）：各书不再写 CHANGES.md，版本记录写进提交信息——bump_original.py 打印的「版本记录:」行原样放进提交信息，带 r 号或 GUJI 卡号（史记写 r 号＋GUJI-750）；本地 book-text 检出不能浅克隆。
-- 版本：r32 起 cv 钉 v0.7.1（8cf4ff7）＋code: 2（k2，书仓 a8c78ac；中心库 book_defaults 已改 code: 2，rev 943666），manager ≥v0.4.35；v0.7.x 配 k1 拒跑，v0.6.x 配 k2 也跑不了。v0.7 起模型走 R2，交单前核 GUJI_DATA_TOKEN 能从密钥仓解出。字形库撤借库（workspace.yaml glyph_lib: {}），钉 g10。（r28–r31：v0.6.38＋k1）改字形库钉号用 book_overrides.glyph_pin、从 glyph_match 起，不改册 yaml。
+- 版本：r32 起 cv 钉 v0.7.1（8cf4ff7）＋code: 2（k2，书仓 a8c78ac；中心库 book_defaults 已改 code: 2，rev 943666），manager ≥v0.4.35；v0.7.x 配 k1 拒跑，v0.6.x 配 k2 也跑不了。v0.7 起模型走 R2，交单前核 GUJI_DATA_TOKEN 能从密钥仓解出。字形库撤借库（workspace.yaml glyph_lib: {}），钉 g10。（r28–r31：v0.6.38＋k1）
+- 下一轮（r33 起）钉 cv v0.7.2＋manager ≥v0.4.37，两者必须一起升（A31 11-10）：manager 低于 0.4.37 时 v0.7.2 遇增删格报 ImportError 退出；row_segment 不过期。本机检出和执行机都要到 0.4.37。增删格落 book-text 的口径见 guji-manager doc/02-精校/换包落book-text-增删格.md。改字形库钉号用 book_overrides.glyph_pin、从 glyph_match 起，不改册 yaml。
 - 设计人审记账、book-text 导出、出单等新流程前，先读总纲 guji-manager doc/00-总览/待审单-人裁事件-book-text格子.md（#449，Sheldon 11-10：所有设计围绕这三样）：book-text 格子＝现状（只录首选字），待审单＝问题（中心库 feedback/lists/proofing，整张重出、改单不动 book-text），人裁事件＝答案（只追加，靠锚重绑，机器不改）。
 
 ## 直接交单：怎么拿令牌、怎么交（2026-11-10 实测通过，SJ 线程）
