@@ -183,3 +183,61 @@ def test_step_boundaries_follow_restepped_rows():
         Cell(slot=c.slot - 1, y0=c.y0, y1=c.y1, x0=c.x0, x1=c.x1, kind=c.kind, gap_center=c.gap_center)
         for c in cells if c.slot >= 2]
     assert J._step_boundaries(bounds, raised, [(1, 3, 3)], n_raised=1) == b
+
+
+def test_single_half_right_only():
+    """只有右行的小注（v1.6）：格网给了整格、墨偏右 → 改成 a 半格；满宽的正文字不动。"""
+    from dataclasses import dataclass, field
+
+    @dataclass
+    class R:
+        cells: list
+        cut_candidates: list = field(default_factory=list)
+        boundaries: list = field(default_factory=list)
+
+    img = np.full((300, 100), 255, np.uint8)
+    img[10:90, 15:85] = 0          # 1：正文字
+    img[110:180, 62:92] = 0        # 2：偏右小字（臣）
+    img[210:280, 60:90] = 0        # 3：偏右小字（照）
+    cs = [Cell(slot=s, y0=100 * (s - 1), y1=100 * s, x0=0, x1=100, kind="char") for s in (1, 2, 3)]
+    res, flags = J.apply(R(cells=cs), img, (0.0, 100.0), 100.0, [(2, 2, 0)])
+    kinds = {c.slot: c.kind for c in res.cells}
+    assert kinds == {1: "char", 2: "jiazhu_a", 3: "jiazhu_a"}, flags
+    a = [c for c in res.cells if c.kind == "jiazhu_a"]
+    assert all(30 <= c.x0 <= 60 and c.x1 == 100 for c in a)
+    assert any("jiazhu_single" in f for f in flags)
+
+
+def test_single_half_keeps_wide_char():
+    """版式说只有右行、格里却是满宽的字（版式错或格号错位）：不动。"""
+    from dataclasses import dataclass, field
+
+    @dataclass
+    class R:
+        cells: list
+        cut_candidates: list = field(default_factory=list)
+        boundaries: list = field(default_factory=list)
+
+    img = np.full((100, 100), 255, np.uint8)
+    img[10:90, 10:90] = 0
+    cs = [Cell(slot=1, y0=0, y1=100, x0=0, x1=100, kind="char")]
+    res, flags = J.apply(R(cells=cs), img, (0.0, 100.0), 100.0, [(1, 1, 0)])
+    assert res.cells[0].kind == "char" and not flags
+
+
+def test_single_half_ignores_frame_scrap():
+    """列尾格左下有版框线碎段（扁墨块）：不算字墨，照样改 a 半格（02:165:1:21「世」）。"""
+    from dataclasses import dataclass, field
+
+    @dataclass
+    class R:
+        cells: list
+        cut_candidates: list = field(default_factory=list)
+        boundaries: list = field(default_factory=list)
+
+    img = np.full((100, 100), 255, np.uint8)
+    img[10:70, 60:90] = 0
+    img[90:94, 0:40] = 0           # 框线碎段
+    cs = [Cell(slot=1, y0=0, y1=100, x0=0, x1=100, kind="char")]
+    res, flags = J.apply(R(cells=cs), img, (0.0, 100.0), 100.0, [(1, 1, 0)])
+    assert res.cells[0].kind == "jiazhu_a", flags

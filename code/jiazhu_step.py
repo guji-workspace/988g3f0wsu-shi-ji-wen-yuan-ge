@@ -111,7 +111,8 @@ def _recs(dz_dir: str) -> dict:
 def page_note_runs(dz_dir, pins_file, book: str, page: int) -> dict[int, list[tuple[int, int, int]]] | None:
     """这一页各列的雙行小注段：{列号: [(段首格号 s0, m_a, m_b), …]}（按 s0 升序）。
 
-    只收两行都是一整段（r、l 各一截、偏移 0）的；有断开、空格的段不收（退回旧切法）。钉位或记录缺失返回 None。"""
+    只收两行都是一整段（r、l 各一截、偏移 0）的；有断开、空格的段不收（退回旧切法）。钉位或记录缺失返回 None。
+    v1.6（11-10）：只有右行、左行空的段（「臣照」「叶」「也」）也收，记 m_b＝0，由 `_single_half` 改切成 a 半格。"""
     head = _pins(str(pins_file)).get((str(book), int(page)))
     if not head:
         return None
@@ -130,10 +131,13 @@ def page_note_runs(dz_dir, pins_file, book: str, page: int) -> dict[int, list[tu
             if r.get("t") != "note":
                 continue
             rr, ll = r.get("r") or [], r.get("l") or []
+            start = int(r["start"])
+            if len(rr) == 1 and not ll and rr[0][0] == 0 and start >= 0 and len(rr[0][1]) >= 1:
+                segs.append((start + 1, len(rr[0][1]), 0))    # 只有右行的小注（v1.6，见 `_single_half`）
+                continue
             if len(rr) != 1 or len(ll) != 1 or rr[0][0] != 0 or ll[0][0] != 0:
                 continue
             m_a, m_b = len(rr[0][1]), len(ll[0][1])
-            start = int(r["start"])
             if start < 0 or m_a < 1 or m_b < 1:
                 continue
             segs.append((start + 1, m_a, m_b))
@@ -558,7 +562,15 @@ def _restep(cells: list, col_gray: np.ndarray, content_x: tuple[float, float], p
 
 def apply(res, col_gray, content_x, period, specs, ink_threshold: int = 128, reading_order=None):
     """`RowBoundaryResult` 上做逐步切：成了换 cells、动过的夹注行格线跟着改（`_step_boundaries`），去掉动过的格的折线候选。返回 (res, 旗)。"""
-    cells, flags = restep(res.cells, col_gray, content_x, period, specs, ink_threshold, reading_order)
+    singles = [sp for sp in specs if sp[2] == 0]
+    specs = [sp for sp in specs if sp[2] >= 1]
+    flags: list[str] = []
+    if singles:
+        res, flags = _single_half(res, col_gray, content_x, singles, ink_threshold)
+    if not specs:
+        return res, flags
+    cells, fl2 = restep(res.cells, col_gray, content_x, period, specs, ink_threshold, reading_order)
+    flags = flags + fl2
     if cells is None:
         return res, flags
     s_min = min(s for s, _a, _b in specs)
@@ -567,6 +579,74 @@ def apply(res, col_gray, content_x, period, specs, ink_threshold: int = 128, rea
     bounds = _step_boundaries(res.boundaries, cells, specs, n_raised)
     return (replace(res, cells=cells, cut_candidates=cands, boundaries=bounds),
             flags + ["jiazhu_step：按整理本分法逐步切"])
+
+
+#: 只有右行的小注（v1.6）：格左边这么宽（列宽的比例）里的墨不超过格墨的 SOLO_LEFT_INK，才算偏右的小字
+SOLO_LEFT_W, SOLO_LEFT_INK = 0.3, 0.03
+#: 缝（a 半格左沿）夹在列宽的这个范围里
+SOLO_GAP_LO, SOLO_GAP_HI = 0.3, 0.65
+#: 缝离小字墨左缘的余量（px）
+SOLO_GAP_PAD = 3
+#: 不算字墨的墨块：高不到 SOLO_MIN_CH px 的、宽是高 SOLO_FLAT 倍以上的（版框线碎段，02:165:1:21「世」格左下）、
+#: 碰格上下沿且高不到格高 SOLO_EDGE_H 的（上下邻字探进来的笔画、列首点线框，03:3:4:1「也」）
+SOLO_MIN_CH, SOLO_FLAT, SOLO_EDGE_H = 8, 3.0, 0.35
+#: 细长竖墨（宽不到 SOLO_RULE_W px、高过格高 SOLO_RULE_H）是界行残线，不算字墨（05:86:2:20「臣」）
+SOLO_RULE_W, SOLO_RULE_H = 6, 0.5
+
+
+def _drop_flat(ink: np.ndarray) -> np.ndarray:
+    """只留像字的墨块（见 `SOLO_MIN_CH` 等）。"""
+    from scipy import ndimage as ndi
+    lab, n = ndi.label(ink)
+    if n == 0:
+        return ink
+    H = ink.shape[0]
+    keep = np.zeros(n + 1, bool)
+    for i, sl in enumerate(ndi.find_objects(lab), start=1):
+        if sl is None:
+            continue
+        h, w = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+        edge = sl[0].start == 0 or sl[0].stop >= H
+        rule = w < SOLO_RULE_W and h > SOLO_RULE_H * H
+        keep[i] = h >= SOLO_MIN_CH and w < SOLO_FLAT * h and not rule and not (edge and h < SOLO_EDGE_H * H)
+    return keep[lab]
+
+
+def _single_half(res, col_gray, content_x, singles, ink_threshold: int = 128):
+    """只有右行、左行空的小注段（整理本 `右:臣照 左:`）：格网切成了整格的，改成 a 半格（v1.6，2026-11-10，SJ）。
+
+    版式（layout_slots）记 half、整理本只给右行字，格网却按正文给了满宽整格（r35 正文 17 格：01:21:1:5「叶」、
+    02:167:6:4–5「臣照」、03:23:7:1「也」…），字认对了但结构错（该是小注 a 半格）。逐格看墨：格左 `SOLO_LEFT_W`
+    列宽里几乎没墨（偏右的小字）才改，缝取小字墨左缘减 `SOLO_GAP_PAD`、夹在 [SOLO_GAP_LO, SOLO_GAP_HI] 列宽；
+    格上下沿不动、不加 b 格（同格网原有的单半 a 格，如 02:165:1:20a）。墨不像偏右小字的格不动。"""
+    if col_gray.ndim == 3:
+        col_gray = col_gray[:, :, 0]
+    x_lo, x_hi = int(round(content_x[0])), int(round(content_x[1]))
+    w = x_hi - x_lo
+    if w <= 8:
+        return res, []
+    want = {s for s0, m_a, _ in singles for s in range(s0, s0 + m_a)}
+    by_slot: dict[int, list] = {}
+    for c in res.cells:
+        by_slot.setdefault(c.slot, []).append(c)
+    new, done = [], []
+    for c in res.cells:
+        if c.slot in want and c.kind == "char" and len(by_slot[c.slot]) == 1:
+            y0, y1 = int(round(c.y0)), int(round(c.y1))
+            ink = _drop_flat(col_gray[y0:y1, x_lo:x_hi] < ink_threshold)
+            tot = int(ink.sum())
+            xs = np.nonzero(ink.sum(axis=0) > 0)[0]
+            if tot >= HALF_MIN_INK and xs.size and ink[:, :int(SOLO_LEFT_W * w)].sum() <= SOLO_LEFT_INK * tot:
+                g = min(max(int(xs[0]) - SOLO_GAP_PAD, int(SOLO_GAP_LO * w)), int(SOLO_GAP_HI * w))
+                gx = float(x_lo + g)
+                new.append(replace(c, kind="jiazhu_a", x0=gx, gap_center=gx,
+                                   ink_ratio=round(_ink_ratio(col_gray[y0:y1, int(gx):x_hi], ink_threshold), 4)))
+                done.append(c.slot)
+                continue
+        new.append(c)
+    if not done:
+        return res, []
+    return replace(res, cells=new), [f"jiazhu_single：只有右行的小注 {len(done)} 格改切 a 半格（{','.join(map(str, done))}）"]
 
 
 def _step_boundaries(bounds, cells, specs, n_raised: int = 0):
