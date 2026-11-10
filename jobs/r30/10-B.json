@@ -1,0 +1,24 @@
+{
+  "kind": "ab",
+  "book": "10",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.6.38",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.6.38-c4-g6-m2-k1-job1807",
+  "compare_to": "main",
+  "book_overrides": {
+    "glyph_pin": 9
+  },
+  "output": {
+    "change": "g9-borrow-off",
+    "note": "r30 B：g9 无借库（A/B 对比，不标 main）",
+    "pack": true
+  },
+  "why": "SJ 第18轮（r30）A/B 之 B：字形库改钉 g9（glyph-e41c7cee2b5470e8，中心库 rev 943108，无借库快照，去掉 borrow/borrow_how）；接 main 包 cv0.6.38-c4-g6-m2-k1-job1807，整册从 glyph_match 起（字形库从 glyph_match 起生效）；cv v0.6.38，manager ≥v0.4.35；-w 须是书仓根，code: 1（k1）；中心库 rev ≥943108；book_overrides glyph_pin 9，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；只出包不标 main、不发线上单。"
+}
