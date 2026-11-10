@@ -5,11 +5,11 @@
   "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
   "cv": "v0.6.32",
   "pipeline": "keben_body_v2",
-  "pages": "all",
+  "pages": "20",
   "steps": {
     "from": "row_segment",
     "to": null
   },
   "base": "cv0.6.31.dev4pg43af102e670b-c4-g6-m2-k1-job1735",
-  "why": "SJ 第9轮（r21，四层迭代切分层补列）：切分线 11-09 新人工定框 02:20:6（中心库 rev 926743，manual-cells 28 条），接 r20 包 cv0.6.31.dev4pg43af102e670b-c4-g6-m2-k1-job1735 从 row_segment 显式起跑；cv v0.6.32（对史记与 v0.6.31/43af102e 等价：其间 seed_admit textlayer_ref_gap 缺省关、已登 code_equiv），manager ≥0.4.30；-w 须是书仓根，code: 1（k1）；db_rev ≥926768；glyph_pin 6，corpus 4，不带 DRIFT；其它与 r20 同。度量看切分指标。（11-09 22:48 切分线补锚 18 条、迁号 9 条，修 human_chars 字块拿不到；不设 GUJI_ALLOW_LOST_HUMAN）"
+  "why": "SJ 第9轮（r21，切分层补列）：02:20:6；接 r20 main 包 cv0.6.31.dev4pg43af102e670b-c4-g6-m2-k1-job1735，只重跑第 20 页，从 row_segment 显式起跑；cv v0.6.32（对史记与 43af102e/v0.6.31 等价：seed_admit textlayer_ref_gap 缺省关、已登 code_equiv），manager ≥0.4.30；-w 须是书仓根，code: 1（k1）；中心库 rev ≥926779；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。度量看切分指标（对 r20）。"
 }

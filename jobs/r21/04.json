@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "04",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.6.32",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.6.31.dev4pg43af102e670b-c4-g6-m2-k1-job1761",
+  "why": "SJ 第9轮（r21，切分层补列）：人裁补锚（rev 926768）；接 r20 main 包 cv0.6.31.dev4pg43af102e670b-c4-g6-m2-k1-job1761，整册，从 seed_admit 显式起跑；cv v0.6.32（对史记与 43af102e/v0.6.31 等价：seed_admit textlayer_ref_gap 缺省关、已登 code_equiv），manager ≥0.4.30；-w 须是书仓根，code: 1（k1）；中心库 rev ≥926779；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。度量看切分指标（对 r20）。"
+}
