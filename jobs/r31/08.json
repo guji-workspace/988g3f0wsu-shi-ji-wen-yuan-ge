@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "08",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.6.38",
+  "pipeline": "keben_body_v2",
+  "pages": "5",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.6.38-c4-g6-m2-k1-job1805",
+  "why": "SJ 第19轮（r31）：08:5:3 切分线钉子（遂字辶末笔被 11/12 格线切进下方夹注，格线移到 1346，格号不变；中心库 rev 943138，seg_pins_check 过）；接 main 包 cv0.6.38-c4-g6-m2-k1-job1805，只重跑第 5 页，从 row_segment 显式起跑（钉子不进指纹）；cv v0.6.38，manager ≥v0.4.35；-w 须是书仓根，code: 1（k1）；中心库 rev ≥943138；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。"
+}
