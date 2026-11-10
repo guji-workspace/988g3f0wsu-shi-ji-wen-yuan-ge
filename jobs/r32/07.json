@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "07",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.6.38",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.6.38-c4-g6-m2-k1-job1804",
+  "book_overrides": {
+    "glyph_pin": 10
+  },
+  "why": "SJ 第20轮（r32）：撤借库（Sheldon 11-10 定），字形库钉 g10（无借库正式快照 glyph-d9d50d7ab2a61a2e，中心库 rev 943479，自有 6,362 条、人裁 5,410）；接 main 包 cv0.6.38-c4-g6-m2-k1-job1804，整册从 glyph_match 起；cv v0.6.38，manager ≥v0.4.35；-w 须是书仓根，code: 1（k1）；中心库 rev ≥943502；book_overrides glyph_pin 10，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。"
+}
