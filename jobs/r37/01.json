@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "01",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.5",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.4-c4-g15-m2-k2-job1908",
+  "book_overrides": {
+    "glyph_pin": 15
+  },
+  "why": "SJ 第25轮（r37）：书级代码 k4（书仓 68d4da2，含 k3 jiazhu_step v1.6 右行小注切 a 半格、k4 发前清格 patch_clean），cell_shrink.manual_ink_fit 开（切分线 rev 957067），切分新定框 7 列（rev 957044）；接 cv0.7.4-c4-g15-m2-k2-job1908（r36 main 包），整册从 row_segment 起；cv v0.7.5、manager ≥v0.4.43；-w 须是书仓根，code: 4；中心库 rev ≥967241（字形库已恢复 967239）；glyph_pin 15（g15 不变），corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；出包对 main 盲读比改字、跑切分快筛对比残墨类、抽 30 格看清格伤字。"
+}
