@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "01",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.6.32",
+  "pipeline": "keben_body_v2",
+  "pages": "40,42,43,44",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.6.32-c4-g6-m2-k1-job1773",
+  "why": "SJ 第12轮（r24，切分层：01 册职名页 5 列逐格定框，中心库 rev 926965）；接 r23 main 包 cv0.6.32-c4-g6-m2-k1-job1773，只重跑第 40、42、43、44 页，从 row_segment 显式起跑（定框不进指纹，须强制从 row_segment 跑）；cv v0.6.32，manager ≥0.4.30；-w 须是书仓根，code: 1（k1）；中心库 rev ≥926965；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。度量看切分指标（对 r23）。"
+}
