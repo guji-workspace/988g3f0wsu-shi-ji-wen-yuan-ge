@@ -22,10 +22,8 @@ params:
     layout_slots_grow: true    # 双行小注列 22–24 行时按实际行数放格（cv #870）
     layout_gap_cols_empty: true
     jiazhu_rows: true
-    jiazhu_free_split: true
-    jiazhu_step_split: true
-    seal_gap_slots_empty: true
-    seal_inkcut: true
+    # jiazhu_free_split／jiazhu_step_split／seal_gap_slots_empty／seal_inkcut：k2（2026-11-10）起是本书代码
+    # （code/jiazhu_step.py、code/seal_ink.py），不再是开关；册配置里留着 true 也不冲突
     alt_cut: true
     header_ref_flag: true
     roster_top_dash: true

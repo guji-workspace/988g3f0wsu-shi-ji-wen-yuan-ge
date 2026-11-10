@@ -1,4 +1,7 @@
-"""雙行小注逐步切（史記文淵閣本，`row_segment.jiazhu_step_split`，2026-11-04，SJ；A22 评审过）。
+"""雙行小注逐步切（史記文淵閣本，2026-11-04，SJ；A22 评审过）＋两行字数可不等（`free_split`，文件末尾）。
+
+本模块覆盖 cv `impl/keben/jiazhu_step`（code.yaml）就生效；原 cv 书级开关 `row_segment.jiazhu_step_split`、
+`jiazhu_free_split` 2026-11-10 删掉（k2）。
 
 为什么
 ------
@@ -591,3 +594,68 @@ def _step_boundaries(bounds, cells, specs, n_raised: int = 0):
     for i in range(1, len(b)):  # 保单调
         b[i] = max(b[i], b[i - 1])
     return b
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# 雙行小注两行字数可不等（设计稿方案 A，Sheldon 2026-11-03 定）。原 cv `impl/keben/row_boundaries._free_split`＋书级开关
+# `row_segment.jiazhu_free_split`，2026-11-10 搬进本书（A20，cv「先搬自成一块的」）：cv 的 `segment_column` 在 `jiazhu_rows`
+# 的夹注段、段尾单半时调本函数（`free_split` 钩子），算法未动。
+# ---------------------------------------------------------------------------------------------------------------
+#: 拆出来的半格墨少于此不算有字（同 cv `impl/keben/jiazhu_split.HALF_MIN_INK`）
+HALF_MIN_INK = 30
+#: 两行字数可不等（`free_split`）：短的那行在自己墨的末行之下再留这么多行才是段底
+FREE_SPLIT_END_PAD = 3
+#: 行墨占比到这么多才算这一行有墨（找短行墨的末行）
+FREE_SPLIT_INK = 0.02
+#: 墨段起头比长的那行末格的这么深（格高的比例）还深，算段下正文字探上来的笔画、不是短行的字（02:13:7「置」）
+FREE_SPLIT_MAX_DEPTH = 0.5
+#: 短行切线处（±1 行里最白的一行）墨占比到这么多算横穿字：两行差 2 字以上，退回旧做法
+FREE_SPLIT_CUT_INK = 0.15
+
+
+def free_split(ink_col: np.ndarray, n: int, long_sub: str, cxi: int, top: int, bot: int,
+                anchor: list[float]) -> "dict[str, list[float]] | None":
+    """段尾单半的雙行小注段（cv `row_boundaries.segment_column` 的 `free_split` 钩子）：长的那行（段尾格墨多的那半，旧口径）在
+    [top, bot) 切 n 格（拉向共用格线）；短的那行只切 n−1 格，切在 [top, 自己墨的末行＋几行) 里，末格下沿就停在那（不补到段底：段底常压着段下正文字探上来的笔画）。
+
+    旧做法两行都切 n 格，短的那行 n−1 个字被摊进 n 格，段中间起每格都是半个字＋半个字（史記 r5「两字并一格」）。
+    短行墨的末行：起头比长行末格的 `FREE_SPLIT_MAX_DEPTH` 还深的墨段不算（段下的正文字常探进段尾格）。排不下返回 None。"""
+    from open_guji_cv.seg.seam import fit_row_cuts
+    w = ink_col.shape[1]
+    spans = {"a": (cxi, w), "b": (0, cxi)}
+    rows = {sub: ink_col[:, xs:xe].sum(axis=1) / float(xe - xs) for sub, (xs, xe) in spans.items()}
+    short_sub = "b" if long_sub == "a" else "a"
+    long_cuts = fit_row_cuts(rows[long_sub], top, bot, n, anchor=anchor)
+    if long_cuts is None:
+        return None
+    # 短行墨的末行：从段底往上，起头比 limit 还深的墨段是段下正文字探上来的笔画，跳过；起头在 limit 之上的
+    # 墨段是短行末字，哪怕它写得低、伸过 limit 也整段算上
+    limit = long_cuts[-2] + FREE_SPLIT_MAX_DEPTH * (bot - long_cuts[-2])
+    ys = top + np.flatnonzero(rows[short_sub][top:bot] >= FREE_SPLIT_INK)
+    end = None
+    k = len(ys) - 1
+    while k >= 0:
+        j = k
+        while j > 0 and ys[j] - ys[j - 1] <= FREE_SPLIT_END_PAD + 1:
+            j -= 1                                    # 墨段 ys[j..k]
+        if ys[j] < limit:
+            end = min(bot, int(ys[k]) + 1 + FREE_SPLIT_END_PAD)
+            break
+        k = j - 1
+    if end is None:
+        return None
+    short_cuts = fit_row_cuts(rows[short_sub], top, end, n - 1)
+    if short_cuts is None:
+        return None
+    # 每格都得有字：哪一格墨不够 HALF_MIN_INK（两行差 2 字以上，短行切 n−1 格仍多出空格），这一段不按本法切、
+    # 退回旧做法——空的半格不发，段中间就剩单半格，Step4 不拆它、整格发成满宽字，坐标对位整列「缺几何」（SJ r6 02:58:8）
+    # 短行的切线也不许横穿字（墨占比到 FREE_SPLIT_CUT_INK）：字数对不上时 DP 只能把字劈开
+    for sub, cuts in ((long_sub, long_cuts), (short_sub, short_cuts)):
+        xs, xe = spans[sub]
+        for y0_, y1_ in zip(cuts[:-1], cuts[1:]):
+            if int(ink_col[int(round(y0_)):int(round(y1_)), xs:xe].sum()) < HALF_MIN_INK:
+                return None
+    r = rows[short_sub]
+    if any(float(r[max(0, int(round(c)) - 1):int(round(c)) + 2].min()) >= FREE_SPLIT_CUT_INK for c in short_cuts[1:-1]):
+        return None
+    return {long_sub: long_cuts, short_sub: short_cuts}
