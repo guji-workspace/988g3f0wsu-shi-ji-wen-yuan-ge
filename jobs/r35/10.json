@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "10",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.2",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.6.38-c4-g6-m2-k1-job1807",
+  "book_overrides": {
+    "glyph_pin": 13
+  },
+  "why": "SJ 第23轮（r35）：字形库钉 g13（无借库，g12 再改回 4 条错刻例；glyph-a3969b4706a8e247，中心库 rev 945783）；接 cv0.6.38-c4-g6-m2-k1-job1807（main 包），整册从 glyph_match 起；cv v0.7.2、manager ≥v0.4.38；-w 须是书仓根，code: 2（k2）；中心库 rev ≥945783；book_overrides glyph_pin 13，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；出包以图上盲读为真值比改字对错，改错≤改对且无新增 main 原对现错才标 main。"
+}
