@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "01",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "待定：含 #1357 的正式版（A31 发版后改钉）",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.6.35-c4-g6-m2-k1-job1780",
+  "why": "SJ 第14轮（r26）：01:40:3 旧人裁碩迁锚到 01:40:3:2（切分线 rev 928374）；接 main 包 cv0.6.35-c4-g6-m2-k1-job1780，整册，从 seed_admit 显式起跑；cv 钉含 #1357 的正式版，manager ≥v0.4.34；-w 须是书仓根，code: 1（k1）；中心库 rev ≥928374；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。"
+}
