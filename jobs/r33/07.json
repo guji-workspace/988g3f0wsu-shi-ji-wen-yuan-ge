@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "07",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.2",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.6.38-c4-g6-m2-k1-job1804",
+  "book_overrides": {
+    "glyph_pin": 11
+  },
+  "why": "SJ 第21轮（r33）：字形库钉 g11（无借库，补 r32 形近错放刻例；glyph-c054b0c7836687f9，中心库 rev 945035）；接 cv0.6.38-c4-g6-m2-k1-job1804（main 包），整册从 glyph_match 起；cv v0.7.2、manager ≥v0.4.38；-w 须是书仓根，code: 2（k2）；中心库 rev ≥945035；book_overrides glyph_pin 11，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；出包对 main 与 r32 比改字对错，错放不增才标 main。"
+}
