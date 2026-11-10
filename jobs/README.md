@@ -8,3 +8,27 @@
 - book-text 版本记录（Sheldon 11-10 定）：各书不再写 CHANGES.md，版本记录写进提交信息——bump_original.py 打印的「版本记录:」行原样放进提交信息，带 r 号或 GUJI 卡号（史记写 r 号＋GUJI-750）；本地 book-text 检出不能浅克隆。
 - 版本：r28 起 cv 钉 v0.6.38（eafd98e1），manager ≥v0.4.35（执行机与本机）。改字形库钉号用 book_overrides.glyph_pin、从 glyph_match 起，不改册 yaml。
 - 设计人审记账、book-text 导出、出单等新流程前，先读总纲 guji-manager doc/00-总览/待审单-人裁事件-book-text格子.md（#449，Sheldon 11-10：所有设计围绕这三样）：book-text 格子＝现状（只录首选字），待审单＝问题（中心库 feedback/lists/proofing，整张重出、改单不动 book-text），人裁事件＝答案（只追加，靠锚重绑，机器不改）。
+
+## 直接交单：怎么拿令牌、怎么交（2026-11-10 实测通过，SJ 线程）
+令牌（JOBSDB_TOKEN／JOBSDB_PASSWORD）在加密仓 sheldonlidev/guji-dev-secret 里，本容器只需要环境变量 `SECRETS_AGE_KEY`（Default 环境已配，不用另设）。**令牌不要打印、不要写进聊天／文档／提交。**
+
+1. 解密载入（Default 环境已装钩子 `/etc/guji_secrets.sh`，缓存 60 分钟到 `~/.guji_secrets.env`，权限 600）：
+   - 先 `add_repo` 密钥仓 `sheldonlidev/guji-dev-secret`，克隆到 `/home/user/guji-dev-secret`（钩子认这个路径；钩子自己取不到仓时才需要手动克隆）。
+   - 然后 `. /etc/guji_secrets.sh`，用 `[ -n "$JOBSDB_TOKEN" ] && echo set` 核对（只看是否 set，别 echo 值）。
+   - 没有钩子时：`GUJI_SECRETS_DIR=/home/user/guji-dev-secret . /home/user/guji-dev-secret/bootstrap.sh`，或 `eval "$(python3 /home/user/guji-dev-secret/gsecrets.py export --names JOBSDB_TOKEN,JOBSDB_PASSWORD)"`。
+2. 装命令（容器里没有预装 `guji_jobs` 时）：`python3 -m venv /tmp/gj && /tmp/gj/bin/pip install -q -e <guji-manager 检出> -e <open-guji-cv 检出> websockets "psycopg[binary]"`。guji-manager 要用 main（add_repo open-guji/guji-manager）；open-guji-cv 是公开仓，`GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 -b dev` 即可。**两个都要装**，缺 cv 时 dry-run 会因 `open_guji_cv` 导入失败而崩。
+3. 交单（在书仓根）：
+   ```
+   . /etc/guji_secrets.sh
+   export GUJI_JOBS_WHO=SJ-<线程名> GUJI_REQUIRE_JOBSDB=1   # GUJI_REQUIRE_JOBSDB=1：没令牌就报错，不退回旧 Neon 库
+   /tmp/gj/bin/python -m guji_manager.jobs workers           # 看执行方在线情况
+   /tmp/gj/bin/python -m guji_manager.jobs ls --book 988g3f0wsu
+   /tmp/gj/bin/python -m guji_manager.jobs submit jobs/rN/NN.json --dry-run   # 先 dry-run，输出规整后定义和指纹
+   /tmp/gj/bin/python -m guji_manager.jobs submit jobs/rN/NN.json             # 真交
+   /tmp/gj/bin/python -m guji_manager.jobs show <号> / wait <号>
+   ```
+4. 注意：
+   - 连的是新库 `wss://relay.open-guji.com/jobsdb`；没设 JOBSDB_TOKEN 会连旧 Neon，单永远没人领。
+   - 判重指纹只算 spec 文本；中心库配置变了 spec 不变会被判 duplicate，再交加 `--again`。dry-run 若提示"取不到中心库 rev"，说明少装了 cv 或没连上中心库，别忽略。
+   - spec 里 `cv` 必须是远端分支／提交，`ws_repo` 写本书仓；base 用带 jobNNNN 的完整标签。
+   - 任务库不做：标 main、覆盖正式产物、推册配置——这些仍按总览规矩手动做。
