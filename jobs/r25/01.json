@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "01",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.6.35",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.6.32-c4-g6-m2-k1-job1775",
+  "why": "SJ 第13轮（r25）：01 册职名页 4 格人裁（批 sheldon-roster-1110，Sheldon 11-10 看图，中心库 rev 928337）入 seed_admit；接 r24 main 包 cv0.6.32-c4-g6-m2-k1-job1775，整册从 seed_admit 起跑；cv v0.6.35（A31 11-10：换单不再把待审首选字写进已有字的格），manager v0.4.34；-w 须是书仓根，code: 1（k1）；中心库 rev ≥928337；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。"
+}
