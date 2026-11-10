@@ -2,8 +2,9 @@
 # 改了本目录的代码：本仓提交 → guji code release -w <本仓根> 出 releases/k<N+1>.json → 打 tag k<N+1>。
 name: shiji_wyg            # ＝册配置的 seg_set
 base: keben
-cv: ">=0.6.31"          # 要 cv 带书级代码（core/book_code.py）
+cv: ">=0.7.0"          # k2 起要 cv 带 seal_ink／free_split 钩子（2026-11-10）；≥0.7.1 起登了等价、row_segment 不过期
 overrides:
   keben.roster_segment: roster_segment
   keben.roster_glyph: roster_glyph
-  keben.jiazhu_step: jiazhu_step
+  keben.jiazhu_step: jiazhu_step     # 雙行小注逐步切＋两行字数可不等（free_split）
+  keben.seal_ink: seal_ink           # 大印下剔印泥、表中间空格位记空

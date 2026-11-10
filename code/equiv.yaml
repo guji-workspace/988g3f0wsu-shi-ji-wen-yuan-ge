@@ -7,3 +7,7 @@ moved:
   jiazhu_step: {from: open_guji_cv.books.shiji_wyg.jiazhu_step, hash: 941e17d3b4de9157f37c8515f28ba8f3ae681c076bc97fb121d9c690bf5af0a0}
 entries:
   - {module: jiazhu_step, new: 8aec7f88819820ff8b68a3308796b228d7ecc1ff4c4669c143e18e63f05e86c6, old: 941e17d3b4de9157f37c8515f28ba8f3ae681c076bc97fb121d9c690bf5af0a0}
+# 2026-11-10 k2（A20，cv #1375 书级代码第 4 步）：jiazhu_step 末尾并进原 cv row_boundaries._free_split（free_split），
+# 算法未动；新模块 seal_ink 由 cv code_equiv.SPLITS 与 jiazhu_step 合回一项。证据：SJ 11-10 用 cv dev 1bb3d44b＋本 PR code/
+# 重跑 row_segment，与 r28 main 包（v0.6.38＋k1）比 02 册 6 页、05 册 4 页产物逐字节相同。
+  - {module: jiazhu_step, new: 29a7d515da5f95f74102459a2dd960c360ef203b25e8c2da2575298db6d85254, old: 8aec7f88819820ff8b68a3308796b228d7ecc1ff4c4669c143e18e63f05e86c6}
