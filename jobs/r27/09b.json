@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "09",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.6.36",
+  "pipeline": "keben_body_v2",
+  "pages": "1-10,12-14,16-22,24-40,42-58,60-66,68-82,84-108,110-138,140,142-203",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.6.31.dev4pg43af102e670b-c4-g6-m2-k1-job1742",
+  "why": "SJ 第15轮（r27）09 册重交：#1791 因 10 个年表页（11,15,23,41,59,67,83,109,139,141，在 page_kinds.table 8-163 内）border_detect 越界失败，manager #427 起有失败页即整单不存包；按总览方案 2 这 10 页不进重跑页（沿用 main 包 job1742 的记录，年表页整页不整理），其余页从 row_segment 起与 cv v0.6.36 对齐；A22 修 border_detect 后下次换钉再收。接 main 包 cv0.6.31.dev4pg43af102e670b-c4-g6-m2-k1-job1742；cv v0.6.36，manager ≥v0.4.34；-w 须是书仓根，code: 1（k1）；中心库 rev ≥928781；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。"
+}
