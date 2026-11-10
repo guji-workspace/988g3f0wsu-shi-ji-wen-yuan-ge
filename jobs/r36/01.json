@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "01",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.4",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.6.38-c4-g6-m2-k1-job1798-a2",
+  "book_overrides": {
+    "glyph_pin": 15
+  },
+  "why": "SJ 第24轮（r36）：字形库钉 g15（无借库；改回 3 条错人裁、撤 椒/衞 刻例；glyph-d6bbfb44b7865440，中心库 rev 946828）；接 cv0.6.38-c4-g6-m2-k1-job1798-a2（main 包），整册从 row_segment 起（带切分线 rev 946813 新定框：01 p45/p49、06 p93、08 p124、10 p2）；cv v0.7.4、manager ≥v0.4.41；-w 须是书仓根，code: 2（k2）；中心库 rev ≥946828；book_overrides glyph_pin 15，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；出包以图上盲读为真值、对参校本比改字对错，改错≤改对且无新增 main 原对现错才标 main。"
+}
