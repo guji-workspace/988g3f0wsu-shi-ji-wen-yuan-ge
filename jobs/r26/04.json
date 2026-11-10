@@ -3,7 +3,7 @@
   "book": "04",
   "ws_glob": "988g3f0wsu-*",
   "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
-  "cv": "待定：含 #1357 的正式版（A31 发版后改钉）",
+  "cv": "v0.6.36",
   "pipeline": "keben_body_v2",
   "pages": "125,141",
   "steps": {
@@ -11,5 +11,5 @@
     "to": null
   },
   "base": "cv0.6.32-c4-g6-m2-k1-job1766",
-  "why": "SJ 第14轮（r26）：cv #1357 row_segment 1.48：列端格只有版框线记空格（edge_frame_only），04 册 p125、p141 卷末空列 13 格；接 main 包 cv0.6.32-c4-g6-m2-k1-job1766，只重跑第 125,141 页，从 row_segment 显式起跑；cv 钉含 #1357 的正式版，manager ≥v0.4.34；-w 须是书仓根，code: 1（k1）；中心库 rev ≥928374；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。"
+  "why": "SJ 第14轮（r26）：cv #1357 row_segment 1.48：列端格只有版框线记空格（edge_frame_only），04 册 p125、p141 卷末空列 13 格；接 main 包 cv0.6.32-c4-g6-m2-k1-job1766，只重跑第 125,141 页，从 row_segment 显式起跑；cv v0.6.36（含 #1357 row_segment 1.48），manager ≥v0.4.34；-w 须是书仓根，code: 1（k1）；中心库 rev ≥928374；glyph_pin 6，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN。"
 }
