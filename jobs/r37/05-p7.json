@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "05",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.5",
+  "pipeline": "keben_body_v2",
+  "pages": "7",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.5-c4-g15-m2-k4-job1940-a2",
+  "book_overrides": {
+    "glyph_pin": 15
+  },
+  "why": "SJ r37 补：05 册 p7 从 seed_admit 重跑，用码位表 U+EF6E→揚（A24 11-11，GUJI-750；中心库 rev 969770 起；05:7:8:13b 原收为私用区字）；接 r37 05 册包 cv0.7.5-c4-g15-m2-k4-job1940-a2；cv v0.7.5、manager ≥0.4.43、code: 4、glyph_pin 15；注：同 rev 起 book_defaults 开 seed_admit.ref_lib_coord_dissent（r38 起用），本页一并生效。"
+}
