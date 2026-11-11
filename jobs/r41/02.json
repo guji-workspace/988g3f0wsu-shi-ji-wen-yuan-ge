@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "02",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.7",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.7.6-c4-g17-m2-k6-job2007",
+  "book_overrides": {
+    "glyph_pin": 17
+  },
+  "why": "SJ 第29轮（r41）：cv v0.7.7＋k6＋g17（glyph-bf15ea65c3a02ed1）；接 main 包 cv0.7.6-c4-g17-m2-k6-job2007；整册从 glyph_match 起（带 r40 后新入中心库的日曰/己已巳等人裁）；code: 6，manual_ink_fit 开，ref_lib_coord_dissent 开；manager ≥v0.4.43；-w 须是书仓根；中心库 rev ≥971280；glyph_pin 17，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；#1413（丈/文 zw 组）未发，再下一轮带；出包对 main 盲读比改字。"
+}
