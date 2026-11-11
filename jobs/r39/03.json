@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "03",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.6",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "cell_shrink",
+    "to": null
+  },
+  "base": "cv0.7.5-c4-g16-m2-k5-job1965",
+  "book_overrides": {
+    "glyph_pin": 17
+  },
+  "why": "SJ 第27轮（r39）：cv v0.7.6（#1410 钉子列 manual_ink_fit 不抹出框笔画）＋书级代码 k6（书仓 efa7d50，patch_clean 离字主体<4px 不抹）＋字形库 g17（glyph-bf15ea65c3a02ed1，rev 970616，撤错看的「文」刻例）；接 cv0.7.5-c4-g16-m2-k5-job1965（r38 包），整册从 cell_shrink 起；code: 6，cell_shrink.manual_ink_fit 开，seed_admit.ref_lib_coord_dissent 开，码位 U+EF6E→揚；manager ≥v0.4.43；-w 须是书仓根；中心库 rev ≥970620；glyph_pin 17，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；出包对 main 盲读比改字，清格抽格（书仓 code 切 k6 取字块），快筛。"
+}
