@@ -90,3 +90,27 @@ def test_k5_vertical_stroke_inside_char_kept():
     before = [(p < 128).sum() for _, p in _pairs(img, boxes)]
     out = clean_column(img, _pairs(img, boxes))
     assert [(p < 128).sum() for _, p in out] == before
+
+
+def test_k6_thin_edge_stroke_next_to_body_kept():
+    """k6：贴列边的细长竖若紧挨本字主体（「臣」「田」的左竖断开），不当残线抹。"""
+    import numpy as np
+    from guji_book.shiji_wyg.patch_clean import clean_column
+    img = np.full((400, 120), 255, np.uint8)
+    img[20:90, 6:90] = 0                               # 字身
+    img[25:85, 0:4] = 0                                # 贴左边的细长竖，与字身隔 2px
+    boxes = [(0.0, 18.0, 92.0, 106.0)]
+    before = (img[18:106, 0:92] < 128).sum()
+    out = clean_column(img, _pairs(img, boxes))
+    assert (out[0][1] < 128).sum() == before
+
+
+def test_k6_far_edge_rule_still_erased():
+    import numpy as np
+    from guji_book.shiji_wyg.patch_clean import clean_column
+    img = np.full((400, 120), 255, np.uint8)
+    img[20:90, 30:90] = 0                              # 字身
+    img[25:85, 0:4] = 0                                # 贴左边、离字远的残线
+    boxes = [(0.0, 18.0, 92.0, 106.0)]
+    out = clean_column(img, _pairs(img, boxes))
+    assert (out[0][1] < 128).sum() == 70 * 60

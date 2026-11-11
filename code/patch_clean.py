@@ -1,4 +1,4 @@
-"""发前清格（史記文淵閣本，写本；2026-11-10 SJ「切分快筛」装饰类；k5 2026-11-11 SJ 收紧，见文末各常量的 k5 注）。
+"""发前清格（史記文淵閣本，写本；2026-11-10 SJ「切分快筛」装饰类；k5 2026-11-11 SJ 收紧，k6 同日加贴字不抹，见各常量的 k5／k6 注）。
 
 覆盖 cv `impl/keben/patch_clean`（code.yaml）。格框、格号都不动，出字块前把不属于本格的墨抹白：
 
@@ -33,6 +33,9 @@ MAX_ERASE = 0.15
 #: k5（11-11）：长直线只认「细而孤立」的——剥出来的竖线块宽不超过 RULE_W，且两侧 RULE_GAP px 外几乎没墨（≤ RULE_SIDE_INK）；
 #: 否则是字的长竖（千、年、陳的竖）被开运算剥出一条细缝，不抹。
 RULE_W, RULE_GAP, RULE_SIDE_INK = 6, 3, 0.25
+#: k6（11-11）：要抹的块（贴边块、邻格残笔）离本格主体墨不到 NEAR_GAP px 就不抹——贴着字内侧的是本字断开的笔画
+#: （03:83:8:9b「臣」左竖、02:106:7:6b「田」左竖），不是外来残墨。主体＝本格自有、不在待抹之列、够 MIN_PX 的块。
+NEAR_GAP = 4
 #: 收紧余量（同 extractor.TIGHT_MARGIN）。
 TIGHT_MARGIN = 2
 
@@ -115,6 +118,16 @@ def plan_column(img, pairs, ink_threshold: int = 128) -> dict:
                 continue
             erase_ids.append(i)
             why["fringe"] += c
+        if erase_ids:                          # k6：贴着本格主体的不抹
+            body_ids = [i for i, _c in pieces if owner[i] == j and i not in erase_ids and area[i] >= MIN_PX]
+            if body_ids:
+                body = np.isin(sl, body_ids).astype(np.uint8)
+                near = cv2.dilate(body, np.ones((2 * NEAR_GAP + 1, 2 * NEAR_GAP + 1), np.uint8)) > 0
+                keep = set(np.unique(sl[near & np.isin(sl, erase_ids)]).tolist())
+                for i in keep:
+                    c = next(c for ii, c in pieces if ii == i)
+                    why["side" if owner[i] == j else "fringe"] -= c
+                erase_ids = [i for i in erase_ids if i not in keep]
         m = np.isin(sl, erase_ids) if erase_ids else np.zeros(sl.shape, bool)
         v = vl_ok[y0:y1, x0:x1]
         why["vline"] = int(v.sum())
