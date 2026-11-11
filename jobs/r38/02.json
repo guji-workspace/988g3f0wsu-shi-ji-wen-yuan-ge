@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "02",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.5",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.4-c4-g15-m2-k2-job1909",
+  "book_overrides": {
+    "glyph_pin": 16
+  },
+  "why": "SJ 第26轮（r38）：书级代码 k5（书仓 7c07747，patch_clean 修 k4 伤字；含 k3 小注半格、k4 发前清格）＋字形库 g16（glyph-bad806ad2d1bc23d，rev 968801，补约 40 个高频字自有样本）＋seed_admit.ref_lib_coord_dissent 开＋码位 U+EF6E→揚（rev 969770）；cell_shrink.manual_ink_fit 开；接 cv0.7.4-c4-g15-m2-k2-job1909（r36 main 包），整册从 row_segment 起；cv v0.7.5、manager ≥v0.4.43；-w 须是书仓根，code: 5；中心库 rev ≥969772；glyph_pin 16，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；出包对 main 盲读比改字（看「二」类错、新增 main 原对现错为 0、改错≤改对），快筛对比，抽格看清格伤字。"
+}
