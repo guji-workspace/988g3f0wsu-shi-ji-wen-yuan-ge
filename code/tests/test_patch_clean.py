@@ -61,3 +61,32 @@ def test_vertical_rule_erased():
     out = clean_column(img, _pairs(img, boxes))
     inst, p = out[0]
     assert inst.bbox[2] <= 92 + 1                      # 界行抹掉后右边收回字身
+
+
+def test_k5_edge_touching_thick_stroke_kept():
+    """k5：贴列边的字笔画（夹注 b 行偏旁、氵点）不当残线抹。"""
+    import numpy as np
+    from guji_book.shiji_wyg.patch_clean import clean_column
+    img = np.full((400, 120), 255, np.uint8)
+    img[20:90, 30:90] = 0                              # 字身
+    img[40:56, 0:14] = 0                               # 贴左边的粗短笔画（非细长竖条）
+    boxes = [(0.0, 18.0, 92.0, 106.0)]
+    out = clean_column(img, _pairs(img, boxes))
+    inst, p = out[0]
+    assert (p < 128).sum() == 70 * 60 + 16 * 14
+
+
+def test_k5_vertical_stroke_inside_char_kept():
+    """k5：字里的长竖（千、年、陳）两侧有墨，不当界行抹。"""
+    import numpy as np
+    from guji_book.shiji_wyg.patch_clean import clean_column
+    img = np.full((400, 120), 255, np.uint8)
+    img[20:180, 58:62] = 0                             # 贯穿两格的长竖
+    img[40:46, 30:90] = 0                              # 两侧连着横画
+    img[120:126, 30:90] = 0
+    img[60:66, 30:90] = 0
+    img[150:156, 30:90] = 0
+    boxes = [(28.0, 18.0, 92.0, 106.0), (28.0, 106.0, 92.0, 182.0)]
+    before = [(p < 128).sum() for _, p in _pairs(img, boxes)]
+    out = clean_column(img, _pairs(img, boxes))
+    assert [(p < 128).sum() for _, p in out] == before

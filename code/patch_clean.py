@@ -1,4 +1,4 @@
-"""发前清格（史記文淵閣本，写本；2026-11-10 SJ「切分快筛」装饰类）。
+"""发前清格（史記文淵閣本，写本；2026-11-10 SJ「切分快筛」装饰类；k5 2026-11-11 SJ 收紧，见文末各常量的 k5 注）。
 
 覆盖 cv `impl/keben/patch_clean`（code.yaml）。格框、格号都不动，出字块前把不属于本格的墨抹白：
 
@@ -20,16 +20,19 @@ VLINE_LEN = 200
 #: 横向开运算长度占列宽：剥版框横线。
 HLINE_FRAC = 0.85
 #: 边角块：在本框里的部分 ≤ 本框墨这么多才算外来残笔。
-FRINGE_MAX = 0.35
+FRINGE_MAX = 0.10
 #: 边角块伸进本框的深度（从靠主人那一边的框边量起）不超过框高这么多。写本上下两字常常一笔相连（「抄」的撇连到下面
 #: 「内」），连成一块的主体在下格，伸进本框的那截却是本字的一大笔：按深度挡住，只抹贴边的浅残笔。
-FRINGE_DEPTH = 0.30
+FRINGE_DEPTH = 0.20
 #: 贴列边小块：≤ 本框墨这么多。
 SIDE_MAX = 0.15
 #: 连通块小于这么多像素不计入本框墨（碎点）。
 MIN_PX = 8
 #: 一格抹掉的墨超过本格墨这么多就不清。
-MAX_ERASE = 0.40
+MAX_ERASE = 0.15
+#: k5（11-11）：长直线只认「细而孤立」的——剥出来的竖线块宽不超过 RULE_W，且两侧 RULE_GAP px 外几乎没墨（≤ RULE_SIDE_INK）；
+#: 否则是字的长竖（千、年、陳的竖）被开运算剥出一条细缝，不抹。
+RULE_W, RULE_GAP, RULE_SIDE_INK = 6, 3, 0.25
 #: 收紧余量（同 extractor.TIGHT_MARGIN）。
 TIGHT_MARGIN = 2
 
@@ -52,6 +55,7 @@ def plan_column(img, pairs, ink_threshold: int = 128) -> dict:
     ink = (g < ink_threshold).astype(np.uint8)
     vl = cv2.morphologyEx(ink, cv2.MORPH_OPEN, np.ones((VLINE_LEN, 1), np.uint8)) > 0
     hl = cv2.morphologyEx(ink, cv2.MORPH_OPEN, np.ones((1, max(40, int(HLINE_FRAC * W))), np.uint8)) > 0
+    vl_ok = _rule_like(vl, ink)
     core = ((ink > 0) & ~vl & ~hl).astype(np.uint8)
     n, lab, st, _c = cv2.connectedComponentsWithStats(core, connectivity=8)
     area = st[:, cv2.CC_STAT_AREA]
@@ -89,7 +93,10 @@ def plan_column(img, pairs, ink_threshold: int = 128) -> dict:
             o = owner[i]
             if o == j:
                 x, _y, w, _h, a = st[i]
-                if (x <= 1 or x + w >= W - 1) and c < SIDE_MAX * box_ink and a >= MIN_PX:
+                _h = st[i][3]
+                # k5：贴列边的只抹细长竖条（界行残线、邻列刀口）；贴边的字笔画（夹注左行 b 的偏旁、氵点、言旁）不抹
+                if (x <= 1 or x + w >= W - 1) and c < SIDE_MAX * box_ink and a >= MIN_PX \
+                        and w <= RULE_W and _h >= 3 * w:
                     erase_ids.append(i)
                     why["side"] += c
                 continue
@@ -109,7 +116,7 @@ def plan_column(img, pairs, ink_threshold: int = 128) -> dict:
             erase_ids.append(i)
             why["fringe"] += c
         m = np.isin(sl, erase_ids) if erase_ids else np.zeros(sl.shape, bool)
-        v = vl[y0:y1, x0:x1]
+        v = vl_ok[y0:y1, x0:x1]
         why["vline"] = int(v.sum())
         m |= v
         if y0 <= first_y + 1 or y1 >= last_y - 1:   # 列首、列尾格才抹版框横线
@@ -121,6 +128,26 @@ def plan_column(img, pairs, ink_threshold: int = 128) -> dict:
             continue
         out[k] = (m, why)
     return out
+
+
+def _rule_like(vl, ink):
+    """剥出的竖线里只留像界行的：块宽 ≤ RULE_W，且左右 RULE_GAP 之外各一列墨占比 ≤ RULE_SIDE_INK（k5）。"""
+    import cv2
+    import numpy as np
+    n, lab, st, _ = cv2.connectedComponentsWithStats(vl.astype(np.uint8), connectivity=8)
+    keep = np.zeros(n, bool)
+    H, W = ink.shape[:2]
+    for i in range(1, n):
+        x, y, w, h, _a = st[i]
+        if w > RULE_W:
+            continue
+        side = []
+        for xx in (x - RULE_GAP - 1, x + w + RULE_GAP):
+            if 0 <= xx < W:
+                side.append(float((ink[y:y + h, xx] > 0).mean()))
+        if all(f <= RULE_SIDE_INK for f in side):
+            keep[i] = True
+    return keep[lab]
 
 
 def clean_column(img, pairs, ink_threshold: int = 128):
