@@ -1,0 +1,11 @@
+{
+  "kind": "rerun",
+  "book": "42",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.17",
+  "pipeline": "keben_body_v2",
+  "pages": "30,31,38,39,46,47",
+  "base": "cv0.7.17-c5-g19-m2-k6-job2328",
+  "why": "SJ 42 册：页表 r002 补裁 6 页（djvu 954/956/958 下开），yaml 撤 cover、钉 source_rev 2（rev 975265）；接首跑包 cv0.7.17-c5-g19-m2-k6-job2328，这 6 页全管线。"
+}
