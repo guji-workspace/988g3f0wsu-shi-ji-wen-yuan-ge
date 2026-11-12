@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "04",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.10",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.7.9-c4-g17-m2-k6-job2086",
+  "book_overrides": {
+    "glyph_pin": 18
+  },
+  "why": "SJ 第31轮（r43）：cv v0.7.10（#1426 coord_ref_hint，只作点校候选）＋k6＋g18（glyph-8d64d7af394c1e97，补 A9 刻例）；各册 align_ref：coord_relaxed、coord_circle_ext、coord_dp＋coord_ref_hint 开，symbol_ref_blank_cov 0.90（切分线 rev 971624）；中心库 rev ≥971644；接 r42 main 包 cv0.7.9-c4-g17-m2-k6-job2086，整册从 glyph_match 起；code: 6；manager ≥v0.4.43；-w 须是书仓根；corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；#1413 未发；出包对 r42 main 盲读比改字，核 A31 40 格对照表（rounds/r42/A9补刻例对账表-g18.tsv）与 ○新放行。"
+}
