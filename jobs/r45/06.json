@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "06",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.11",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.11-c5-g18-m2-k6-job2132-a2",
+  "book_overrides": {
+    "glyph_pin": 18
+  },
+  "why": "SJ 第33轮（r45）：各册 follow_ref 追加 嵗=歳,擊=撃,聽=聼,教=敎（看图 24 格 0 错，rounds/r44/异体对候选表.md）；cv v0.7.11＋k6＋g18＋corpus 5；中心库 rev ≥972167；接 r44 main 包 cv0.7.11-c5-g18-m2-k6-job2132-a2，seed_admit 起；不设 GUJI_ALLOW_LOST_HUMAN；出包比对 r44 main，逐格核这 24 格与其他变化。"
+}
