@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "21",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.17",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "border_detect",
+    "to": null
+  },
+  "base": "cv0.7.17-c5-g19-m2-k6-job2330",
+  "why": "SJ 第39轮（r51，全书降人审第一轮）：cv v0.7.17；字形库 g19（g20 待批）＋形近线新人裁 482 条（金标抽检 0 错）；切分线 rev 976292（cover:[1]、卷末叠印印框、钉子）；中心库 rev 976307；接 main 包 cv0.7.17-c5-g19-m2-k6-job2330，border_detect 起。"
+}
