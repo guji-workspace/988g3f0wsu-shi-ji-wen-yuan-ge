@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "03",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.15",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.12-c5-g19-m2-k6-job2183",
+  "why": "SJ 第38轮（r50）：cv v0.7.15（#1452 vis_ruling_half、#1456 solo_coord_dissent，seed_admit 已登 code_equiv）；书 yaml 开 vis_ruling_half、solo_coord_dissent（中心库 rev 972463）＋截至该 rev 的形近线人裁；k6＋g19＋corpus 5；接 main 包 cv0.7.12-c5-g19-m2-k6-job2183，seed_admit 起；出包核 r49 solo 坐标异议 6 格是否退审、半格放行格看图。"
+}
