@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "04",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.12",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.7.12-c5-g18-m2-k6-job2174",
+  "book_overrides": {
+    "glyph_pin": 19
+  },
+  "why": "SJ 第37轮（r49）：字形库 g19（glyph-fe2985d35a2f279d，rev 972339，新增 8 刻例）＋届时已入库新人裁/裁定；cv v0.7.12＋k6＋corpus 5；接 r48 main 包 cv0.7.12-c5-g18-m2-k6-job2174，glyph_match 起；出包对 r48 main 盲读比改字。"
+}
