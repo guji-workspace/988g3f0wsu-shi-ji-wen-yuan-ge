@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "09",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.17",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.17-c5-g19-m2-k7-job2448",
+  "why": "SJ 第40轮（r52）：cv v0.7.17、k7、g19（g20 待批）；follow_ref 追加 66 对异体（形近线金标 0 错）＋L1 异码归一 9 条（Sheldon 11-12，A31 codepoints）；中心库 rev 977212；接 r51 main 包 cv0.7.17-c5-g19-m2-k7-job2448，seed_admit 起。"
+}
