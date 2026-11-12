@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "09",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.10",
+  "pipeline": "keben_body_v2",
+  "pages": "194",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.10-c4-g18-m2-k6-job2102",
+  "book_overrides": {
+    "glyph_pin": 18
+  },
+  "why": "SJ r43 补：09 册 p194 从 row_segment 重跑，带切分线钉子 09:194:5（按主切法钉成 1–15，钉子列不再出备选格网；rev 972025）；接 r43 09 包 cv0.7.10-c4-g18-m2-k6-job2102；cv v0.7.10、k6、g18；中心库 rev ≥972025；修 alt 格网抬头一格致格号整列减一。"
+}
