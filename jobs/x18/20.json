@@ -1,0 +1,10 @@
+{
+  "kind": "rerun",
+  "book": "20",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.17",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "why": "SJ 扩册：20 册首跑（全管线，无 base）。cv v0.7.17（#1463 指纹只算本册点名源文件）＋k6＋g19＋corpus 5；中心库含 0244 语料（A31 rev 972853）＋cv_version 钉 0.7.17；params 照 11 册现行、无年表、卷末印框、page_map: pins。"
+}
