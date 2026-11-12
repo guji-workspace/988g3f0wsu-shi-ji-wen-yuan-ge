@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "02",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.11",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.10-c4-g18-m2-k6-job2095",
+  "book_overrides": {
+    "glyph_pin": 18
+  },
+  "why": "SJ 第32轮（r44，zw 专轮）：cv v0.7.11（#1413 丈/文 zw 组，点名才开）＋k6＋g18；book_defaults group_flow 183 组末尾追加 zw；册 corpus: 5（底库 b22 含 zw/rules.yaml＋书库 v2）；中心库 rev ≥972122；接 r43 main 包 cv0.7.10-c4-g18-m2-k6-job2095，整册从 seed_admit 起；manager ≥v0.4.43；-w 须是书仓根；不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；3 条标「文」实为「丈」的人裁（02:124:2:2a、02:43:7:3b、03:170:6:17a）不动；出包只比丈/文相关格，图为准，金标盲读 0 错再标 main。"
+}
