@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "04",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.11",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.11-c5-g18-m2-k6-job2130",
+  "book_overrides": {
+    "glyph_pin": 18
+  },
+  "why": "SJ 第34轮（r46）：带形近线新人裁 10 整格（rev 972174）＋57 半格（rev 972243，27 格改字）；follow_ref 撤 嵗=歳（r45 sui 组把 12 格已对的嵗改歲），保留 擊=撃,聽=聼,教=敎；cv v0.7.11＋k6＋g18＋corpus 5；中心库 rev ≥972263；接 r44 main 包 cv0.7.11-c5-g18-m2-k6-job2130（r45 未标），seed_admit 起；出包对 r44 main 比，区分人裁带来与其他，逐格看图核 27 改字格。"
+}
