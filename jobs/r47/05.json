@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "05",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.12",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.11-c5-g18-m2-k6-job2153",
+  "book_overrides": {
+    "glyph_pin": 18
+  },
+  "why": "SJ 第35轮（r47）：cv v0.7.12（#1438 修 follow_ref 表项接管 variants 致嵗→歲）；恢复 follow_ref 嵗=歳；k6＋g18＋corpus 5；中心库 rev ≥972287；接 r46 main 包 cv0.7.11-c5-g18-m2-k6-job2153，seed_admit 起；出包核嵗相关格（03 册 1、04 册 11、r45 新放 16 格）及其他变化。"
+}
