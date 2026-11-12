@@ -1,0 +1,12 @@
+{
+  "kind": "rerun",
+  "book": "11",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.12",
+  "pipeline": "keben_body_v2",
+  "pages": "90,165",
+  "steps": {"from": "seal_detect", "to": null},
+  "base": "cv0.7.12-c5-g19-m2-k6-job2207",
+  "why": "SJ 11 册第二轮：切分线钉 11:90:6 题署列（manual-cells）＋11:165 stain_pages 与印框 overrides（中心库 rev 972441）；接首跑包 job2207，p90/p165 seal_detect 起。"
+}
