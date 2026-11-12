@@ -1,0 +1,10 @@
+{
+  "kind": "rerun",
+  "book": "11",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.12",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "why": "SJ 扩册试点：11 册首跑（全管线，无 base）。cv v0.7.12＋k6＋g19＋corpus 5；中心库 rev 972417（params 照 10 册、年表 159 页记 table、page_map: pins）。计划见 rounds/r49/扩展计划-11册起.md。"
+}
