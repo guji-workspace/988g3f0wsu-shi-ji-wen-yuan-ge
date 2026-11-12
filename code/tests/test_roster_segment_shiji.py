@@ -31,3 +31,12 @@ def test_step_uses_shiji_module_only_for_shiji_books(tmp_path, monkeypatch):
     assert not calls                                   # 显式写殿本的册走殿本的实现（本仓有 code/，不写 seg_set 就归本书）
     _run(tmp_path / "sj", monkeypatch, seg_set="shiji_wyg")
     assert calls                                       # 史記册走本仓 code/ 的
+
+
+def test_header_cols_accepts_ref_variant_spellings():
+    # 整理本把撰者行写成「集觧」「隼解」「索隐」时也要认作卷端标题列（r50：25:16:4、25:44:4、29:106:5 等被格网劈坏）
+    from guji_book.shiji_wyg.roster_segment import header_cols
+    refs = {1: "宋中郎外兵曹參軍裴駰集解", 2: "宋中郎外兵曹參軍裴駰集觧", 3: "宋中郎外兵曹參軍裴駰隼解",
+            4: "唐國子博士弘文館學士司馬貞索隐", 5: "唐國子博士弘文館學士司馬貞索隱",
+            6: "唐諸王侍讀率府長史張守節正義", 7: "太史公曰余讀諜記黄帝以來皆有年數"}
+    assert header_cols(refs) == {1, 2, 3, 4, 5, 6}
