@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "03",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.9",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.7.7-c4-g17-m2-k6-job2059",
+  "book_overrides": {
+    "glyph_pin": 17
+  },
+  "why": "SJ 第30轮（r42）：cv v0.7.9（#1421 圈号○对位补强 coord_circle_ext，GUJI-767）＋k6＋g17；各册 yaml align_ref 开 coord_circle_ext（coord_relaxed 已开，中心库 rev 971422）；接 r41 包 cv0.7.7-c4-g17-m2-k6-job2059，整册从 glyph_match 起（含对位及其后）；code: 6；manager ≥v0.4.43；-w 须是书仓根；中心库 rev ≥971422；glyph_pin 17，corpus 4，不带 DRIFT，不设 GUJI_ALLOW_LOST_HUMAN；#1413 未发；出包对 r41 main 盲读比改字，○对位列数请切分线 seg_check。"
+}
