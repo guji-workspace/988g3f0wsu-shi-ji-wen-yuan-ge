@@ -1,0 +1,18 @@
+{
+  "kind": "rerun",
+  "book": "03",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.12",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.12-c5-g18-m2-k6-job2161",
+  "book_overrides": {
+    "glyph_pin": 18
+  },
+  "why": "SJ 第36轮（r48）：codepoints 冡: 冢 暂归一（Sheldon 11-12，A24 L1，A31 推 rev 972294）＋截至 rev 972294 已入库的形近线人裁、字形线裁定；cv v0.7.12＋k6＋g18（g19 未出）＋corpus 5；接 r47 main 包 cv0.7.12-c5-g18-m2-k6-job2161，seed_admit 起；出包核冡/冢格（03:126:7:15a 疑家单看）及其他变化。"
+}
