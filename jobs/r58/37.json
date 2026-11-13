@@ -7,9 +7,9 @@
   "pipeline": "keben_body_v2",
   "pages": "all",
   "steps": {
-    "from": "border_detect",
+    "from": "row_segment",
     "to": null
   },
-  "base": "cv0.7.18-c5-g20-m2-k7-job2910",
-  "why": "SJ 第46轮（r58）：cv v0.7.27（v0.7.18＋#1467＋#1490＋#1492＋#1496 整字护栏门槛 0.05）、k8（snap_cut 0.4）、g20；coord_dp_skip_cost 0.6 沿用；codepoints 60 条（含 L1 48 条归一）、follow_ref 撤 13 对（91→78）、切分线新钉；中心库 rev 992227；接最新 main 包 cv0.7.18-c5-g20-m2-k7-job2910，border_detect 起。"
+  "base": "cv0.7.27-c5-g20-m2-k8-job3150-a3",
+  "why": "SJ 第46轮（r58）：cv v0.7.27（v0.7.18＋#1467＋#1490＋#1492＋#1496 整字护栏门槛 0.05）、k8（snap_cut 0.4）、g20；coord_dp_skip_cost 0.6 沿用；codepoints 60 条（含 L1 48 条归一）、follow_ref 撤 13 对（91→78）、切分线新钉；中心库 rev 993544（含切分线 37:86:3 钉子；base 改接 r58 #3150 包，row_segment 起补跑）；接最新 main 包 cv0.7.18-c5-g20-m2-k7-job2910，border_detect 起。"
 }
