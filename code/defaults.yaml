@@ -18,6 +18,7 @@ params:
     inner_frame_only: true     # 与 inner_frame_cut 同开：拟出内框线那一边不再逐格剥框线
     inner_frame_keep_cross: true   # 字脚压内框线，穿线笔画留着
   row_segment:
+    snap_cut: 0.4              # 格线劈字修法（cv #1490，v0.7.25 起）：42 册强档劈字 49→0、中档 247→122（A22 11-13）
     row_pitch: free
     layout_slots_grow: true    # 双行小注列 22–24 行时按实际行数放格（cv #870）
     layout_gap_cols_empty: true
