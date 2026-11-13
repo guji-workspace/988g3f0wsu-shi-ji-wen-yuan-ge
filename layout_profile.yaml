@@ -1,0 +1,22 @@
+# 史記文淵閣本（988g3f0wsu，seg_set shiji_wyg）版式档案：这本书「长什么样」，只写事实不写开关。
+# 格式见 ai-team domain/CV/A22/切分开关收敛与版式档案-2026-11-13.md 第三节。放书仓根目录，不进 code/ 的 k 号清单、不进产物指纹；
+# 第一步只当文档和 seg check 口径用，不驱动切分代码。2026-11-13 SJ 切分线按 r53–r59 全书排查定。
+layout_profile:
+  script: 写本                  # 四库馆臣手写，字大小、字距随手变
+  grid: free                    # row_pitch free；正文名义 21 格，字距不匀，扁字（一二三）、大字常见
+  slots_per_col: null           # 名义 21；雙行小注列可放到 22–24 行（layout_slots_grow）
+  snap_range: 0.4               # snap_cut 0.4（cv #1490）：格线可离等分位置 0.4 格高找字缝
+  margin: {top: 小, bottom: 小}  # 首字贴上框；末字常坐在下框线上（列端框线要剥）
+  head_raise: true              # 正文少见，职名页、表页有
+  jiazhu:
+    rows: independent           # jiazhu_rows＋书级 jiazhu_step：两行各按自己的字缝切
+    uneven_count: true          # 右行常比左行多一两字（free_split）
+  header_col:
+    detect: ref_position        # k11 起：参校本整列「史記卷N」为锚，前接「欽定四庫全書」，后接到篇名列（第N／苐N）止；无锚页回退旧正则
+    where: 卷首叶第 1–7 列（欽定四庫全書、史記卷N、撰、集解、索隱、正義、篇名）；卷末首列卷末题
+    spacing: 疏且不等            # 撰者行「漢太史令」四字拉满半列、「司馬遷撰」紧排；按参校本字数切，不按格网
+  seals: [卷首大印压题署列, 卷末乾隆御覽之寶压空列, 职名页印]
+  col_end_frame: solid          # 实线、字脚贴线（tight_rule_band、frame_line_max_off 0.35、inner_frame_keep_cross）
+  page_kinds: [body, roster, table]   # 年表页整页跳过（page_kinds）；01 册目录页不走正文
+  overhang_strokes: many        # 长撇长捺常伸出格，seg check 出格墨（CLIP）口径放宽（R012）
+  reference: 殆知阁（daizhige），reference_trust very_high，逐页钉 page_pins.jsonl

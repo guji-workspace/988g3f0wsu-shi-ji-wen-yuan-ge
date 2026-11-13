@@ -11,13 +11,17 @@ params:
     top_weak_floor: 0.25
   column_warp:
     tight_rule_band: true      # 字贴界行写，判带收紧，不连左偏旁一起抹
+    det_warp: true             # 列射影 numpy 双精度、跨 CPU 逐位一致（Sheldon 11-06 三书全开）；k11 从中心库 book_defaults 挪来（A22 开关收敛 11-13）
   cell_shrink:
     frame_line_max_off: 0.35   # 全页框线线位只认贴着版框的（列尾字脚齐平会被当第二、三道框线）
     jiazhu_end_halves: true    # 列端雙行小注格两半各剥框渣
     jiazhu_strip_rules: true   # 列端夹注格也剥框线、长竖线
     inner_frame_only: true     # 与 inner_frame_cut 同开：拟出内框线那一边不再逐格剥框线
     inner_frame_keep_cross: true   # 字脚压内框线，穿线笔画留着
+    manual_ink_fit: true       # 定框列每格先在框内收墨再外扩、框外抹白（cv #1405，SJ 11-10）；k11 从 42 册 yaml 收来
+    # inner_frame_cut：cv #1154 起缺省开，k11 把 42 册 yaml 里的 true 删了，这里也不写
   row_segment:
+    cut_judge: unet_f64        # 切点判官 torch 双精度（同 det_warp）；k11 从中心库 book_defaults 挪来
     snap_cut: 0.4              # 格线劈字修法（cv #1490，v0.7.25 起）：42 册强档劈字 49→0、中档 247→122（A22 11-13）
     row_pitch: free
     layout_slots_grow: true    # 双行小注列 22–24 行时按实际行数放格（cv #870）

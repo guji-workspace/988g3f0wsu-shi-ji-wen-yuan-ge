@@ -156,3 +156,16 @@ def test_plain_column_one_off_fits_blocks_not_equal_split():
     after = [(it.y0, it.y1) for it in rc.items]
     assert len(after) == 3 and after[1] == (before[1][0], before[2][1])
     assert after[0] == before[0] and after[-1] == before[-1]   # 首字、末字原样
+
+
+def test_header_cols_by_ref_position():
+    # R001：按参校本位置认——「史記卷N」锚点前的「欽定四庫全書」、后面连着的短列直到篇名列；异写（索𨼆、缺正義、苐N）不再漏
+    refs = {1: "欽定四庫全書", 2: "史記卷一百十三", 3: "漢太史令司馬遷撰", 4: "宋中郎外兵曹參軍裴駰集解",
+            5: "唐國子博士𢎞文館學士司馬貞索𨼆", 6: "唐諸王侍讀率府長史張守節", 7: "南越尉佗列傳苐五十三",
+            8: "南越王尉佗者真定人也姓趙氏秦時已并天下略定楊越"}
+    assert SJ.header_cols(refs) == {1, 2, 3, 4, 5, 6, 7}
+    # 卷末题：锚点后是空列就停
+    assert SJ.header_cols({1: "史記卷六十五", 2: "", 3: "欽定四庫全書"}) == {1, 3}
+    # 目录页：「列傳第二十六刺客」第N 后还接人名，不算篇名列，停
+    toc = {1: "史記卷八十六", 2: "列傳第二十六刺客", 3: "曹沫專諸"}
+    assert SJ.header_cols(toc) == {1}
