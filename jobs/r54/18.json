@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "18",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.18",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "align_ref",
+    "to": null
+  },
+  "base": "cv0.7.17-c5-g20-m2-k7-job2795",
+  "why": "SJ 第42轮（r54）：cv v0.7.18（含 #1468）、k7、g20；align_ref.coord_dp_skip_cost 0.6（A22，去 g20 下 coord_dp 回退错格）；中心库 rev 979858；接 r53 main 包 cv0.7.17-c5-g20-m2-k7-job2795，align_ref 起。"
+}
