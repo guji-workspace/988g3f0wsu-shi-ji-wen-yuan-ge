@@ -7,9 +7,9 @@
   "pipeline": "keben_body_v2",
   "pages": "all",
   "steps": {
-    "from": "seed_admit",
+    "from": "row_segment",
     "to": null
   },
   "base": "cv0.7.18-c5-g20-m2-k7-job2910",
-  "why": "SJ 第43轮（r55）：cv v0.7.18、k7、g20；codepoints 60 条（含 L1 48 条归一）生效，follow_ref 撤 13 对（91→78）；中心库 rev 991845；接 r54 main 包 cv0.7.18-c5-g20-m2-k7-job2910，seed_admit 起。"
+  "why": "SJ 第43轮（r55）：cv v0.7.18、k7、g20；codepoints 60 条（含 L1 48 条归一）生效，follow_ref 撤 13 对（91→78）；中心库 rev 991856；接 r54 main 包 cv0.7.18-c5-g20-m2-k7-job2910，row_segment 起。并入切分线 Sheldon 少见字页钉的 10 列（manual-cells 126，13 p107、28 p78、29 p61、37 p4/p164、41 p99、42 p33/p114/p116/p140），故 row_segment 起。"
 }
