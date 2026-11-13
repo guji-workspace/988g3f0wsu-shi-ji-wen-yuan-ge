@@ -1,0 +1,26 @@
+{
+ "digest": "7dd5864b0280fda6246e2cbf3494432fba3db51fca2ec148e5c998eb09607008",
+ "files": {
+  "README.md": "420d1a95cdb8f0871f80397759c8aabf4ef667765fd6f4da0dc8774812d1061a",
+  "code.yaml": "3a817629708f3231d069ab8d0a653eedc0da8d02ff36cd27ee4fcb74d03bb4ff",
+  "defaults.yaml": "9b0cdd691b408fd45eb74b3bb1c8dcddcfc0a2a8d59b9f3f2dd6c9c3665f8b69",
+  "equiv.yaml": "d78aca3d36efcd001355a0a9d3dbe45c190280b918e8cd76468a2dd7cc90774c",
+  "jiazhu_step.py": "a670f9a959c7f58cb10046706d86d72d3940aa6536550dea859d79a9e1b079c7",
+  "patch_clean.py": "1b3407e84ed821a62c4b6260a7270d52ee8d6ec6dc04587756b5fe1f34d976a6",
+  "roster_glyph.py": "27d19ec7a4547ee61df0f53fa00804c4fdd819482394f13a37d82b8c7dec8d89",
+  "roster_segment.py": "5ac782b3cb631be80627c64171abebbfa52b005ed9c363b5237c67c643df6878",
+  "samples.yaml": "0bb2cc32b9826b910693a46e6b29d24327f534cac835bd488f473c415385fdbc",
+  "seal_ink.py": "ae304a193782d3096bcfbeeacd714a6487ff55df8792b518384e043303c3748b",
+  "tests/conftest.py": "b94e077db06eea736dd6ac2828b5e8fe0787cfc5cf17f23c9dccf79e0a738ef7",
+  "tests/test_jiazhu_free_split.py": "77e0eeac1eda1e3db5eda088d2c0c003d2149b85deb3f7a573ec3ac975f242f7",
+  "tests/test_jiazhu_step.py": "b4bb7bf81ced2d9306b08a7e8233b4403cdea251889cc74262fff07b00c90139",
+  "tests/test_patch_clean.py": "fcbddf3b58e0dd5a9c4b9dcbde9c60945a3ba8b9f3621704ca9c1527a05bfde5",
+  "tests/test_roster_segment_shiji.py": "8db1914c1c99690a799350b23aba13835f98b48f6c11afd5864c5a88f312887a",
+  "tests/test_roster_top_dash.py": "2ebda97242e996803222d08c0ff1ed40be1a8b6956c340faab0854661c246fd0",
+  "tests/test_seal_ink.py": "b56df98d5b8d791b06aa8c94a6aca68ab31c37dafd0f8180f6fa228718a6612d",
+  "tests/test_shiji_roster_ref.py": "b805230a1b9326abe9e2cd48c48e87512739a2fba34901afe2196bc4512cc44b"
+ },
+ "k": 8,
+ "note": "row_segment.snap_cut 0.4（cv #1490，格线劈字修法；r56）",
+ "tested_cv": "0.7.17+dirty"
+}
