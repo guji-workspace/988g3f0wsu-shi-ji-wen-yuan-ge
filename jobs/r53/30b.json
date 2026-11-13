@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "30",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.17",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.17-c5-g20-m2-k7-job2807",
+  "why": "SJ 第41轮 r53 补跑 30 册：切分线钉 30:64:5 主格网（rev 979296，修 r53 整列错一格）；g20、k7、cv v0.7.17；接 r53 包 cv0.7.17-c5-g20-m2-k7-job2807，row_segment 起。"
+}
