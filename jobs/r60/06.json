@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "06",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.32",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.27-c5-g20-m2-k8-job3353",
+  "why": "SJ 第48轮（r60）：cv v0.7.32（v0.7.27＋#1517 follow_ref 钩子）、k10（follow_ref_rival 同族异体不当对手，A24）、g20；r59-ctx2-fix（撤 49 格、05:21:3:21b 改日）；中心库 rev 1001035；接 r59 main 包 cv0.7.27-c5-g20-m2-k8-job3353，seed_admit 起。"
+}
