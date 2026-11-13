@@ -3,7 +3,7 @@
   "book": "06",
   "ws_glob": "988g3f0wsu-*",
   "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
-  "cv": "v0.7.25",
+  "cv": "v0.7.26",
   "pipeline": "keben_body_v2",
   "pages": "all",
   "steps": {
@@ -11,5 +11,5 @@
     "to": null
   },
   "base": "cv0.7.18-c5-g20-m2-k7-job2879",
-  "why": "SJ 第44轮（r56）：cv v0.7.25（v0.7.18＋#1467＋#1490）、k8（snap_cut 0.4）、g20；coord_dp_skip_cost 0.6 沿用；codepoints 60 条（含 L1 48 条归一）、follow_ref 撤 13 对（91→78）、切分线新钉；中心库 rev 991950；接最新 main 包 cv0.7.18-c5-g20-m2-k7-job2879，row_segment 起。"
+  "why": "SJ 第44轮（r56）：cv v0.7.26（v0.7.18＋#1467＋#1490＋#1492 整字护栏；r56＋r57 合一轮）、k8（snap_cut 0.4）、g20；coord_dp_skip_cost 0.6 沿用；codepoints 60 条（含 L1 48 条归一）、follow_ref 撤 13 对（91→78）、切分线新钉；中心库 rev 992042；接最新 main 包 cv0.7.18-c5-g20-m2-k7-job2879，row_segment 起。"
 }
