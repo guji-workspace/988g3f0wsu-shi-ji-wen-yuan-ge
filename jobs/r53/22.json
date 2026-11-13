@@ -7,9 +7,9 @@
   "pipeline": "keben_body_v2",
   "pages": "all",
   "steps": {
-    "from": "border_detect_gate",
+    "from": "border_detect",
     "to": null
   },
   "base": "cv0.7.17-c5-g19-m2-k7-job2580-a2",
-  "why": "SJ 第41轮（r53）：cv v0.7.17、k7；字形库钉 g20（Sheldon 11-12 批准推库，glyph-e9b43c68e071ba54）；切分线 r53 全书排查修完（rev 979210：12 列格级钉子＋叠印页印框）；中心库 rev 979294；接 r52 main 包 cv0.7.17-c5-g19-m2-k7-job2580-a2，border_detect_gate 起。"
+  "why": "SJ 第41轮（r53）：cv v0.7.17、k7；字形库钉 g20（Sheldon 11-12 批准推库，glyph-e9b43c68e071ba54）；切分线 r53 全书排查修完（rev 979210：12 列格级钉子＋叠印页印框）；中心库 rev 979294；接 r52 main 包 cv0.7.17-c5-g19-m2-k7-job2580-a2，border_detect 起。"
 }

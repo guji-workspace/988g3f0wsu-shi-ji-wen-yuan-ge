@@ -39,3 +39,6 @@
 - 内容：row_segment 四个书级开关（seal_inkcut、seal_gap_slots_empty、jiazhu_free_split、jiazhu_step_split）从 cv 删掉，实现搬进书仓 code/（seal_ink.py、jiazhu_step.free_split），出 k2（PR #1，合并提交 a8c78ac 打 tag k2）。
 - 验等价：先逐字比 diff（与 cv v0.6.38 原实现只差导入路径、常量出处）；再在本机用含钩子的 cv dev＋PR 的 code/，设 `GUJI_CODE_DRIFT=warn`、`--override '{"code":2}'`，把 main 包铺进临时工作区（products/<册>/…，data_full 链到原图），`guji step row_segment --pages … --force --no-prep` 重跑，和 main 包比：02 册 6 页、05 册 4 页（含 p2 印泥页、02:13/58 夹注 free_split 页）逐字节相同。证据登进 code/equiv.yaml，cv 侧 row_segment 不过期，所以全书重跑从 glyph_match 起就够。
 - 换钉顺序：合 PR → 打 k2 → 中心库 book_defaults `code: 2`（db push --no-admit）→ spec 钉 cv v0.7.1 → 交单。已排着的 v0.6.38 单要先取消（#1823–#1832），否则新配置下会拒跑或出两套包。
+
+## steps.from 不能写 border_detect_gate（11-13）
+r53 首交 11–42 册写 `from: border_detect_gate`，pipeline 报 ValueError 全挂（#2756–#2787）。闸挂在 border_detect 出口会自动跑，要从切分最早步重跑一律写 `from: border_detect`。
