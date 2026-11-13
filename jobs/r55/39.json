@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "39",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.18",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.18-c5-g20-m2-k7-job2912",
+  "why": "SJ 第43轮（r55）：cv v0.7.18、k7、g20；codepoints 60 条（含 L1 48 条归一）生效，follow_ref 撤 13 对（91→78）；中心库 rev 991845；接 r54 main 包 cv0.7.18-c5-g20-m2-k7-job2912，seed_admit 起。"
+}
