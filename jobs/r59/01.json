@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "01",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.27",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.27-c5-g20-m2-k8-job3111",
+  "why": "SJ 第47轮（r59）：cv v0.7.27、k8、g20 不变；形近线文意两路人裁 412 格（批 r59-ctx2）＋follow_ref 追加 17 对（78→95）；中心库 rev 998261；接 r58 main 包 cv0.7.27-c5-g20-m2-k8-job3111，seed_admit 起。"
+}
