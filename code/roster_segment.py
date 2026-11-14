@@ -1010,18 +1010,11 @@ def _load_records(dz_dir: str) -> dict[str, dict]:
 # 唐諸王侍讀率府長史張守節正義／X本紀第N。写本这些行字距不跟格网（「第二十二」挤成两格高，撰者行疏），
 # 格网切把「首」「長」「讀」劈开、「兵」的两点分给下一格。这几列字数整理本里有，按职名页同一条路切
 # （几何切 + 按整理本字数重切），壳见 `steps/row_segment._header_columns`。
-_HEADER_RE = re.compile(
-    r"^(欽定四庫全書"
-    r"|史記卷[一二三四五六七八九十百]+(上|中|下)?"
-    r"|[漢宋唐].{4,18}(撰|集[解觧]|隼解|索[隱隠隐]|正義)"   # 整理本异写：集觧、隼解、索隐（A22 r50 核，2026-11-12）
-    r"|.{0,10}(本紀|世家|列傳|表|書)第[一二三四五六七八九十百]+(上|中|下)?"
-    r"|.{2,10}(年表|月表))$")
-
-
-_ANCHOR_RE = re.compile(r"^史記卷[一二三四五六七八九十百]+(上|中|下)?$")
+_ANCHOR_RE = re.compile(r"^史[記訖紀][卷巻][一二三四五六七八九十百]+(上|中|下)?$")   # 参校本异写：巻、史訖、史紀
 _PIAN_RE = re.compile(r"[第苐][一二三四五六七八九十百]+(上|中|下)?$")
 _HEADER_MAX = 20      # 题署列整理本字数上限（最长「唐國子博士𢎞文館學士司馬貞索隱」15 字）
 _HEADER_SPAN = 6      # 卷题列后面最多几列还算题署（撰、集解、索隱、正義、篇名）
+_SIKU = "欽定四庫全書"
 
 
 def _norm(line: str | None) -> str:
@@ -1031,28 +1024,23 @@ def _norm(line: str | None) -> str:
 def header_cols(refs: dict[int, str]) -> set[int]:
     """这一页里卷端标题列的列号，按参校本位置认（不靠逐个异写的正则，切分根因台账 R001）。
 
-    锚点是参校本整列为「史記卷N」的列（卷端、卷末都有）：
-    - 前一列整列为「欽定四庫全書」也算（卷端首列）；
-    - 往后连着的列，整列不空、不超过 20 字、没有小字「臣」，一直认到篇名列（以「第N／苐N」收尾）为止；
-      含「第N」却不以它收尾的（目录页「列傳第二十六刺客」）就停，最多 6 列；
-      中间碰到空列或长列就停（卷末题后面是空列或下一卷）。
-    没有锚点的页（年表页、职名页、正文页）回退到原正则，保持旧认法。"""
+    - 参校本整列为「欽定四庫全書」的列一律算（卷首叶、序首叶的首列）；
+    - 锚点是参校本整列为「史記卷N」的列（含异写「巻」「史訖」「史紀」；卷端、卷末题都有）；
+    - 锚点往后连着的列，整列不空、不超过 20 字、不含「<」（小字「臣」记作 `<臣|>`），一直认到篇名列
+      （以「第N／苐N」收尾）为止，最多 6 列；碰到空列、长列或下一个锚点就停；含「第N」却不以它收尾的
+      （目录页「列傳第二十六刺客」）也停、不算。
+    不再用旧的整列正则 `_HEADER_RE` 兜底（太史公自序里以「…世家第N」收尾的正文列曾被它当题署切坏，42:69:8）。"""
     t = {c: _norm(v) for c, v in refs.items()}
-    out: set[int] = set()
+    out = {c for c, v in t.items() if v == _SIKU}
     for a in sorted(c for c, v in t.items() if _ANCHOR_RE.match(v)):
         out.add(a)
-        if t.get(a - 1) == "欽定四庫全書":
-            out.add(a - 1)
         for c in range(a + 1, a + 1 + _HEADER_SPAN):
             v = t.get(c, "")
-            if not v or len(v) > _HEADER_MAX or "<" in v or _ANCHOR_RE.match(v):
+            if not v or len(v) > _HEADER_MAX or "<" in v or _ANCHOR_RE.match(v) or v == _SIKU:
                 break
             if re.search(r"[第苐][一二三四五六七八九十百]", v) and not _PIAN_RE.search(v):
                 break     # 目录页「列傳第二十六刺客」：第N 后还接人名，不是篇名列
             out.add(c)
             if _PIAN_RE.search(v):
                 break
-    for col, v in t.items():
-        if v and "<" not in v and _HEADER_RE.match(v):
-            out.add(col)
     return out
