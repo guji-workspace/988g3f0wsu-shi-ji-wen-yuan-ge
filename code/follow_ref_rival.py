@@ -1,26 +1,43 @@
-"""follow_ref 领先差：同族异体不当对手（史記文淵閣本，k9；SJ 请求、A24 定规则，2026-11-13；钩子 cv#1517）。
+"""follow_ref 领先差：同族异体不当对手（史記文淵閣本；k11 表路＋variants 路；k12 补「同族但边表缺边」）。
 
 史記按整理本录字（`follow_ref_variants`）。三形家族的第三形（吴／呉／吳、嵗／歳／歲 里的第三个）贴得很近，被算成对手，
 已判对的格卡在 `follow_ref_gap` 送审。本钩子只在算领先差时把这样的字排除；cov 门槛、领先门槛、硬疑问、diff 照旧。
 
 一个候选字 c（不是 ref／lib）当「同族第三形」排除，要同时满足：
-1. 表路（`follow_ref` 表里的对子，via=None）与 `follow_ref_variants` 路（via="variants"）都生效。k10 只认 variants 路，漏了：
-   嵗=歳、吳=吴 都在册 yaml 的表里，走表路，k10 钩子被跳过、30 格一格没翻（r60，SJ-batch 发现）；
-2. 与整理本字同义（`facts(ref, c).same_semantic`），且与配对形 lib 也有强异体边（族要自洽；lib 一侧不要求同义，吴／呉 在 vmap 里不同义但边是 T2 两来源）；
-3. 关系层强异体：T1，或 T2 且 `n_bridge ≥ 2`（T2 单来源，如 傳／傅（twedu 一家），不算）；
-4. 不在 never_group、edge_pair_exclude，且 ref／lib 与 c 不同属某个 `near_form` 字组。
-形近字（昊／吴、傅／傳、敖／教、繫摰／擊撃）没有这样的边，照旧算对手。
+1. 表路（via=None）与 `follow_ref_variants` 路（via="variants"）都生效；
+2. c 与整理本字、与配对形 lib 两头都「同族」，且至少一头是**强关系**，另一头至少同义：
+   - 强关系＝同义＋（边表 T1，或 T2 且 `n_bridge ≥ 2`，或两字同在一个已审定的 `variant` 字组）；
+   - 同义＝`facts.same_semantic`；
+   - 两头都不在 never_group、edge_pair_exclude，且不同属某个 `near_form` 字组。
+   k11 要求两头都是边表强关系；k12 放宽为「一头强、一头同义」，并把 variant 字组算作强关系，补上隐=𨼆（隠）、隐／隠（𨼆）、虗／虛（虚）
+   这类边表缺边的同族。T2 单来源（傳／傅 twedu 一家、悦／恱 hydzd 一家）不算强，也不同义，照旧当对手。
+形近字（昊／吴、傅／傳、敖／教、繫摰／擊撃）没有这样的关系，照旧算对手。
 
-66 格回放（r58 ★main）：30 格翻成放行（吳吴 13、嵗歳 17），两路盲读 0 错放。评估见 ai-team
-domain/CV/质检/领先差排除同族异体评估-2026-11-13/。
+回放（r58 66 格＋r62 90 格）：66 格结果不变（30 格翻放行，两路盲读 0 错）；90 格新增 5 格（隐=𨼆 对手隠 3、隐隠 对手𨼆 1、虗虛 对手虚 1），
+5 格字块图两路盲读 0 错。评估见 ai-team domain/CV/质检/领先差排除同族异体评估-2026-11-13/。
 """
 from __future__ import annotations
 
 
+def _grouped(f) -> bool:
+    return any(kind == "variant" for _gid, kind in f.groups)
+
+
+def _ok(f) -> bool:
+    return not f.never and not f.edge_excluded and not any(kind == "near_form" for _gid, kind in f.groups)
+
+
 def _strong(f, need_semantic: bool) -> bool:
-    return bool(f.is_variant and (f.same_semantic or not need_semantic) and not f.never and not f.edge_excluded
-                and (f.tier == "T1" or (f.tier == "T2" and f.n_bridge >= 2))
-                and not any(kind == "near_form" for _gid, kind in f.groups))
+    if not _ok(f):
+        return False
+    edge = bool(f.is_variant and (f.tier == "T1" or (f.tier == "T2" and f.n_bridge >= 2)))
+    if edge and (f.same_semantic or not need_semantic):
+        return True
+    return bool(f.same_semantic and _grouped(f))
+
+
+def _linked(strong_side: bool, f) -> bool:
+    return strong_side or (f.same_semantic and _ok(f))
 
 
 def rival_skip(*, ref, lib, cands, via, facts):
@@ -28,6 +45,8 @@ def rival_skip(*, ref, lib, cands, via, facts):
     for c, _cov in cands:
         if c in (ref, lib) or c in out:
             continue
-        if _strong(facts(ref, c), True) and _strong(facts(lib, c), False):
+        fr, fl = facts(ref, c), facts(lib, c)
+        sr, sl = _strong(fr, True), _strong(fl, False)
+        if (sr or sl) and _linked(sr, fr) and _linked(sl, fl):
             out.append(c)
     return out or None
