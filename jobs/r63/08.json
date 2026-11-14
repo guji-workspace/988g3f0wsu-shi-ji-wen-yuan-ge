@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "08",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.33",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.33-c5-g20-m2-k11-job3853",
+  "why": "SJ 第51轮（r63）：cv v0.7.33、书仓 k12（follow_ref_rival 同族钩子放宽：一头强一头同义＋variant 字组算强，A24；r62 回放新增 5 格）、g20；中心库 rev 1004774（42 册 code 12）；接 r62 main 包 cv0.7.33-c5-g20-m2-k11-job3853，seed_admit 起。"
+}
