@@ -4,7 +4,8 @@
 已判对的格卡在 `follow_ref_gap` 送审。本钩子只在算领先差时把这样的字排除；cov 门槛、领先门槛、硬疑问、diff 照旧。
 
 一个候选字 c（不是 ref／lib）当「同族第三形」排除，要同时满足：
-1. 只在 `via == "variants"` 生效（表路对子不动）；
+1. 表路（`follow_ref` 表里的对子，via=None）与 `follow_ref_variants` 路（via="variants"）都生效。k10 只认 variants 路，漏了：
+   嵗=歳、吳=吴 都在册 yaml 的表里，走表路，k10 钩子被跳过、30 格一格没翻（r60，SJ-batch 发现）；
 2. 与整理本字同义（`facts(ref, c).same_semantic`），且与配对形 lib 也有强异体边（族要自洽；lib 一侧不要求同义，吴／呉 在 vmap 里不同义但边是 T2 两来源）；
 3. 关系层强异体：T1，或 T2 且 `n_bridge ≥ 2`（T2 单来源，如 傳／傅（twedu 一家），不算）；
 4. 不在 never_group、edge_pair_exclude，且 ref／lib 与 c 不同属某个 `near_form` 字组。
@@ -23,8 +24,6 @@ def _strong(f, need_semantic: bool) -> bool:
 
 
 def rival_skip(*, ref, lib, cands, via, facts):
-    if via != "variants":
-        return None
     out = []
     for c, _cov in cands:
         if c in (ref, lib) or c in out:
