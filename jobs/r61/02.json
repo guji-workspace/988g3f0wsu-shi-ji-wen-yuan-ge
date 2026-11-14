@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "02",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.33",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.32-c5-g20-m2-k10-job3412",
+  "why": "SJ 第49轮（r61）：cv v0.7.33（v0.7.32＋#1523 align_ref.coord_legacy_line_guard，册 yaml 开）、书仓 k11（切分开关收敛、题署列按参校本位置认、follow_ref_rival 表路修复）、g20；册 yaml 删 manual_ink_fit（k11 缺省给）；切分线四批新钉（至 rev 1002065），整册 row_segment 起；形近线 stale_verdicts 撤 48 格；中心库 rev 1002496；接 r60 main 包 cv0.7.32-c5-g20-m2-k10-job3412，row_segment 起。"
+}
