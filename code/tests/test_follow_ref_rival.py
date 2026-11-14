@@ -17,8 +17,10 @@ def test_family_third_form_skipped():
     assert _skip("嵗", "歳", ["歳", "歲", "藏"]) == ["歲"]
 
 
-def test_not_for_table_pairs():
-    assert _skip("吳", "吴", ["吴", "呉"], via=None) is None
+def test_table_pairs_too():
+    """嵗=歳、吳=吴 在册 yaml 的 follow_ref 表里，走表路（via=None）：k10 漏了这条，k11 补上。"""
+    assert _skip("吳", "吴", ["吴", "呉", "昊"], via=None) == ["呉"]
+    assert _skip("傳", "𫝊", ["𫝊", "博", "傅"], via=None) is None
 
 
 def test_lookalikes_and_weak_edges_stay_rivals():
