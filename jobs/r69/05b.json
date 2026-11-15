@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "05",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.38",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.38-c6-g21-m2-k13-job4361",
+  "why": "SJ r69 补 05：#4361 领单早于形近线 r68-fix05（05:60:8:16 人裁「而」，rev 1010340）进库，出包仍是「面」；cv v0.7.38＋k13＋g21＋语料 6 不变，中心库 rev 1010340；接 r69 包 cv0.7.38-c6-g21-m2-k13-job4361，seed_admit 起。"
+}
