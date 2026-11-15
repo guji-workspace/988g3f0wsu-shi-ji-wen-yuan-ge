@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "38",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.39",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.38-c6-g21-m2-k13-job4394-a2",
+  "why": "SJ r70：cv v0.7.39（#1558 sb-否決-卜-史記＋#1557）、书仓 k14（code.yaml cv 下限，书码同 k13）、g21、语料总号 7（底库 b26＋书库 v3）；中心库 rev 1010912；接现役 main 包 cv0.7.38-c6-g21-m2-k13-job4394-a2，seed_admit 起。"
+}
