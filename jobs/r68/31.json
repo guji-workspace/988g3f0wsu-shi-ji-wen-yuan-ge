@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "31",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.33",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "glyph_match",
+    "to": null
+  },
+  "base": "cv0.7.33-c6-g20-m2-k12-job4253-a2",
+  "why": "SJ r68：cv v0.7.33、书仓 k12、语料总号 6 不变；字形库改钉 g21（刻例 7,526）；含 r65-diff 等其后人裁；中心库 rev 1010164；接现役 main 包 cv0.7.33-c6-g20-m2-k12-job4253-a2，glyph_match 起。"
+}
