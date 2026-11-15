@@ -1,0 +1,105 @@
+{
+ "kind": "command",
+ "book": "19",
+ "cv": "v0.7.35",
+ "cv_ref": "v0.7.35",
+ "env": {
+  "GUJI_CODE_DRIFT": "warn",
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "run": [
+  [
+   "products",
+   "pack",
+   "fetch",
+   "{book}",
+   "--label",
+   "cv0.7.33-c5-g20-m2-k12-job3982",
+   "--force",
+   "-w",
+   "{ws}"
+  ],
+  [
+   "cache",
+   "warm",
+   "--book",
+   "{book}",
+   "--jobs",
+   "4",
+   "-w",
+   "{ws}"
+  ],
+  [
+   "seg",
+   "check",
+   "{book}",
+   "-w",
+   "{ws}",
+   "--job",
+   "--no-causes",
+   "--pages",
+   "31",
+   "--out",
+   "seg-check/base"
+  ],
+  [
+   "products",
+   "pack",
+   "fetch",
+   "{book}",
+   "--label",
+   "cv0.7.33-c5-g20-m2-k12-job4138",
+   "--force",
+   "-w",
+   "{ws}"
+  ],
+  [
+   "cache",
+   "warm",
+   "--book",
+   "{book}",
+   "--jobs",
+   "4",
+   "-w",
+   "{ws}"
+  ],
+  [
+   "seg",
+   "check",
+   "{book}",
+   "-w",
+   "{ws}",
+   "--job",
+   "--no-causes",
+   "--pages",
+   "31",
+   "--out",
+   "seg-check/new"
+  ],
+  [
+   "seg",
+   "gate",
+   "--base",
+   "seg-check/base",
+   "seg-check/new",
+   "--book",
+   "史記",
+   "--base-label",
+   "cv0.7.33-c5-g20-m2-k12-job3982",
+   "--new-label",
+   "cv0.7.33-c5-g20-m2-k12-job4138",
+   "--out",
+   "seg-gate"
+  ]
+ ],
+ "pages": "all",
+ "force": true,
+ "no_reuse": true,
+ "output": {
+  "pack": false
+ },
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "pipeline": "keben_body_v2",
+ "why": "SJ r65 标 main 前切分闸（只读，不出包）：r64 main cv0.7.33-c5-g20-m2-k12-job3982 与 r65 候选 cv0.7.33-c5-g20-m2-k12-job4138 在改钉页 31（row_segment 仅这些页有变）各跑 guji seg check --no-causes，再 guji seg gate"
+}
