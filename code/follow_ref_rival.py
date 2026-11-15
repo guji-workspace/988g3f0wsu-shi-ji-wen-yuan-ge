@@ -15,6 +15,10 @@
 
 回放（r58 66 格＋r62 90 格）：66 格结果不变（30 格翻放行，两路盲读 0 错）；90 格新增 5 格（隐=𨼆 对手隠 3、隐隠 对手𨼆 1、虗虛 对手虚 1），
 5 格字块图两路盲读 0 错。评估见 ai-team domain/CV/质检/领先差排除同族异体评估-2026-11-13/。
+
+k13（A24 r68 评估 11-15）：新增钩子 `variant_norm`（cv #1554，seed_admit lane_variant_guard）。本书 codepoints 已把要放的字与候选异体归一
+（canon 相同）时放 canon(字)；库首位是该字的**形近不同字**（明眀↔朋崩萌、凡凢↔几兄、揚↔楊、邊邉↔遏退、關闗関↔閱閻）时不放。
+回放 71 格（witness3／coord_fallback 因 cand_variant 被拦、两形已归一）：56 格放、15 格不放，与 A24 两路盲读一致。
 """
 from __future__ import annotations
 
@@ -50,3 +54,26 @@ def rival_skip(*, ref, lib, cands, via, facts):
         if (sr or sl) and _linked(sr, fr) and _linked(sl, fl):
             out.append(c)
     return out or None
+
+
+
+#: 形近不同字清单（键＝要放的字及其 canon，值＝库首位是这些字时不放）。书仓维护，加一条先看图。
+LOOKALIKE = {
+    "明": {"朋", "崩", "萌"}, "眀": {"朋", "崩", "萌"},
+    "凡": {"几", "兄"}, "凢": {"几", "兄"},
+    "揚": {"楊"}, "扬": {"楊"},
+    "邊": {"遏", "退"}, "邉": {"遏", "退"},
+    "關": {"閱", "閻"}, "闗": {"閱", "閻"}, "関": {"閱", "閻"},
+}
+
+
+def variant_norm(*, lane, char, form, canon, lib):
+    if canon is None or not char or not form:
+        return None
+    c = canon(char)
+    if c != canon(form):
+        return None
+    bad = LOOKALIKE.get(char, set()) | LOOKALIKE.get(c, set())
+    if lib and lib in bad:
+        return None
+    return c

@@ -36,3 +36,15 @@ def test_lookalikes_and_weak_edges_stay_rivals():
     assert _skip("擊", "撃", ["撃", "繫", "摰"]) is None
     assert _skip("悦", "悅", ["悅", "恱"]) is None            # 恱：T2 单来源、不同义
     assert _skip("隐", "隠", ["隠", "聰"]) is None
+
+
+def test_variant_norm_k13():
+    """k13：两形已归一放 canon；库首位是形近不同字不放。"""
+    canon = {"眀": "明", "凢": "凡"}.get
+    f = lambda c: canon(c, c)
+    assert m.variant_norm(lane="witness3", char="眀", form="明", canon=f, lib="明") == "明"
+    assert m.variant_norm(lane="witness3", char="眀", form="明", canon=f, lib="朋") is None
+    assert m.variant_norm(lane="witness3", char="凡", form="凢", canon=f, lib="几") is None
+    assert m.variant_norm(lane="witness3", char="凡", form="凢", canon=f, lib="凡") == "凡"
+    assert m.variant_norm(lane="witness3", char="嵗", form="歲", canon=f, lib="歲") is None   # 本表没归一
+    assert m.variant_norm(lane="witness3", char="眀", form="明", canon=None, lib="明") is None
