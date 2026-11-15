@@ -1,0 +1,90 @@
+{
+ "kind": "command",
+ "book": "37",
+ "cv": "v0.7.35",
+ "cv_ref": "v0.7.35",
+ "env": {
+  "GUJI_CODE_DRIFT": "warn",
+  "GUJI_CORPUS_DRIFT": "warn"
+ },
+ "run": [
+  [
+   "products",
+   "pack",
+   "fetch",
+   "{book}",
+   "--label",
+   "cv0.7.33-c6-g20-m2-k12-job4285-a2",
+   "--force",
+   "-w",
+   "{ws}"
+  ],
+  [
+   "cache",
+   "warm",
+   "--book",
+   "{book}",
+   "--jobs",
+   "4",
+   "-w",
+   "{ws}"
+  ],
+  [
+   "seg",
+   "check",
+   "{book}",
+   "-w",
+   "{ws}",
+   "--job",
+   "--no-causes",
+   "--pages",
+   "38,147,151,178",
+   "--out",
+   "seg-check/base"
+  ],
+  [
+   "products",
+   "pack",
+   "fetch",
+   "{book}",
+   "--label",
+   "cv0.7.33-c6-g21-m2-k12-job4341",
+   "--force",
+   "-w",
+   "{ws}"
+  ],
+  [
+   "cache",
+   "warm",
+   "--book",
+   "{book}",
+   "--jobs",
+   "4",
+   "-w",
+   "{ws}"
+  ],
+  [
+   "seg",
+   "check",
+   "{book}",
+   "-w",
+   "{ws}",
+   "--job",
+   "--no-causes",
+   "--pages",
+   "38,147,151,178",
+   "--out",
+   "seg-check/new"
+  ]
+ ],
+ "pages": "all",
+ "force": true,
+ "no_reuse": true,
+ "output": {
+  "pack": false
+ },
+ "ws_glob": "988g3f0wsu-*",
+ "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+ "pipeline": "keben_body_v2",
+ "why": "SJ r68 标 main 前切分闸（只读，不出包）：现役 main cv0.7.33-c6-g20-m2-k12-job4285-a2 与 r68 候选 cv0.7.33-c6-g21-m2-k12-job4341 在改钉页 38,147,151,178（row_segment 仅这些页有变）各跑 guji seg check --no-causes，比对在跑批线程本地做（任务库不许 seg gate）"
+}
