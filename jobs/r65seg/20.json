@@ -75,21 +75,6 @@
    "106",
    "--out",
    "seg-check/new"
-  ],
-  [
-   "seg",
-   "gate",
-   "--base",
-   "seg-check/base",
-   "seg-check/new",
-   "--book",
-   "史記",
-   "--base-label",
-   "cv0.7.33-c5-g20-m2-k12-job3983",
-   "--new-label",
-   "cv0.7.33-c5-g20-m2-k12-job4113-a2",
-   "--out",
-   "seg-gate"
   ]
  ],
  "pages": "all",
@@ -101,5 +86,5 @@
  "ws_glob": "988g3f0wsu-*",
  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
  "pipeline": "keben_body_v2",
- "why": "SJ r65 标 main 前切分闸（只读，不出包）：r64 main cv0.7.33-c5-g20-m2-k12-job3983 与 r65 候选 cv0.7.33-c5-g20-m2-k12-job4113-a2 在改钉页 106（row_segment 仅这些页有变）各跑 guji seg check --no-causes，再 guji seg gate"
+ "why": "SJ r65 标 main 前切分闸（只读，不出包）：r64 main cv0.7.33-c5-g20-m2-k12-job3983 与 r65 候选 cv0.7.33-c5-g20-m2-k12-job4113-a2 在改钉页 106（row_segment 仅这些页有变）各跑 guji seg check --no-causes，比对在跑批线程本地做（任务库不许 seg gate）"
 }
