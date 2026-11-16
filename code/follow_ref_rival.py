@@ -77,3 +77,27 @@ def variant_norm(*, lane, char, form, canon, lib):
     if lib and lib in bad:
         return None
     return c
+
+
+# 追加进史記书仓 code/follow_ref_rival.py（已挂 code.yaml 的 keben.follow_ref_hooks）。要 cv 带 #1573（dev c060c98）。
+# 规则（Sheldon 11-15 决策卡：圗兾凢来 不并码位归一、保留异体刻形、改流水线放行；SJ 11-16 请求，A22 草稿）：
+# lane_variant_guard 本要以 cand_variant 拦、variant_norm 也不放时，cv 再调 variant_rank。
+# 参校本字（char）的异体只排库第 2 名以后时放行，放行字＝char（参校本字）；异体是本格现字（名次 0）或库首位（名次 1）照旧送审。
+# cv 自动记证据 lane.variant_rank="hook"、lane.variant_from、lane.variant_ranks=[[名次, 异体, cov], …]。
+
+#: 只对这些字放（键＝参校本字，值＝允许的异体）；空 dict＝不限字。先按 Sheldon 定的四对开，要扩再看图。
+RANK_PAIRS = {
+    "圖": {"圗"}, "冀": {"兾"}, "凡": {"凢"}, "來": {"来"},
+}
+
+
+def variant_rank(*, lane, char, forms, cur, cands, lib):
+    if not forms or any(r <= 1 for r, _, _ in forms):
+        return None                     # 异体是现字或库首位：图上多半就是异体，不放
+    if RANK_PAIRS:
+        ok = RANK_PAIRS.get(char, set())
+        if not all(f in ok for _, f, _ in forms):
+            return None
+    if lib and lib in LOOKALIKE.get(char, set()):
+        return None                     # 库首位是形近不同字（LOOKALIKE 已在本模块）
+    return char
