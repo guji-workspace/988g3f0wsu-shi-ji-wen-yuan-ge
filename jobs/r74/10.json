@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "10",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.48",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "border_detect",
+    "to": null
+  },
+  "base": "cv0.7.48-c9-g22-m2-k21-job4647",
+  "why": "SJ r74：10 册 98 页切分线修 vline_overrides（右原点）并钉第 7、8 列述贊夹注格，中心库 rev 1023922；cv v0.7.48、书仓 k21、g22、语料总号 9 不变；接现役 main 包 cv0.7.48-c9-g22-m2-k21-job4647；整册 border_detect 起。"
+}
