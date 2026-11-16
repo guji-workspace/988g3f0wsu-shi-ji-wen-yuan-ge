@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "37",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.44",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.39-c7-g21-m2-k14-job4436",
+  "why": "SJ r71：cv v0.7.44（#1565 卜组补规则、#1573 variant_rank、#1576 follow_ref 不改回刻形）、书仓 k18（variant_rank 刻形版：圗兾凢来 照刻形写）、g21、语料总号 8（底库 b28＋书库 v3）；codepoints 删 凢→凡／兾→冀／圗→圖；中心库 rev 1015442；接现役 main 包 cv0.7.39-c7-g21-m2-k14-job4436，seed_admit 起。"
+}
