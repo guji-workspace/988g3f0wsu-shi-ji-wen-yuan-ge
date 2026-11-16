@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "25",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.50",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "seed_admit",
+    "to": null
+  },
+  "base": "cv0.7.46-c9-g22-m2-k20-job4616",
+  "why": "SJ r75：统一钉 cv v0.7.50（史記 patch 线＝v0.7.48＋#1601 group_flow_exclude）＋书仓 k22（cfc1b91）＋g22＋语料 9＋near_knn（config/groups/near_knn.json）；中心库 rev 1024296（含形近线人裁 1024171/1024197/1024203）；接现役 main 包 cv0.7.46-c9-g22-m2-k20-job4616；只换 seed_admit（group_flow_exclude shi、near_knn），整册 seed_admit 起，换统一标签。"
+}
