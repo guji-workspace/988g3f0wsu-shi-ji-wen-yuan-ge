@@ -50,17 +50,18 @@ def test_variant_norm_k13():
     assert m.variant_norm(lane="witness3", char="眀", form="明", canon=None, lib="明") is None
 
 
-def _rank(char, forms, lib=None):
-    return m.variant_rank(lane="witness3", char=char, forms=tuple(forms), cur=None, cands=(), lib=lib)
+
+def _rank(char, forms, cands=(), lib=None):
+    return m.variant_rank(lane="witness3", char=char, forms=tuple(forms), cur=None,
+                          cands=tuple((c, 0.9) for c in cands), lib=lib)
 
 
-def test_variant_rank_pairs():
-    """k16 variant_rank（Sheldon 11-15：圗兾凢来 不并码位，改流水线放行）：异体排库第 2 名以后才放，放参校本字。"""
-    assert _rank("圖", [(2, "圗", 0.95)], lib="圓") == "圖"
-    assert _rank("冀", [(3, "兾", 0.93)], lib="翼") == "冀"
-    assert _rank("來", [(2, "来", 0.94)], lib="米") == "來"
-    assert _rank("圖", [(1, "圗", 0.98)], lib="圗") is None          # 库首位就是异体：图上多半是刻形，送审
-    assert _rank("圖", [(0, "圗", None)]) is None                    # 本格现字是异体：送审
-    assert _rank("說", [(2, "説", 0.94)], lib="訛") is None          # 不在四对里
-    assert _rank("凡", [(2, "凢", 0.94)], lib="几") is None          # 库首位是形近不同字
-    assert _rank("圖", []) is None
+def test_variant_rank_writes_carved_form():
+    """k17 variant_rank 刻形版（Sheldon 11-16：圗兾凢来 文字层照刻形写）：库里异体排在参校本字前才放，放异体。"""
+    assert _rank("冀", [(2, "兾", 0.93)], cands=["翼", "兾", "冀"], lib="翼") == "兾"
+    assert _rank("冀", [(2, "兾", 0.93)], cands=["翼", "兾"], lib="翼") == "兾"        # 参校本字不在前几名
+    assert _rank("圖", [(3, "圗", 0.95)], cands=["圓", "圖", "圗"], lib="圓") is None  # 参校本字排在异体前：送审
+    assert _rank("圖", [(1, "圗", 0.98)], cands=["圗", "圖"], lib="圗") == "圗"        # 库首位就是刻形
+    assert _rank("圖", [(0, "圗", None)]) is None                                     # 现字不算证据
+    assert _rank("說", [(2, "説", 0.94)], cands=["訛", "説"], lib="訛") is None        # 不在四对里
+    assert _rank("凡", [(2, "凢", 0.94)], cands=["几", "凢"], lib="几") is None        # 库首位是形近不同字

@@ -79,25 +79,26 @@ def variant_norm(*, lane, char, form, canon, lib):
     return c
 
 
-# 追加进史記书仓 code/follow_ref_rival.py（已挂 code.yaml 的 keben.follow_ref_hooks）。要 cv 带 #1573（dev c060c98）。
-# 规则（Sheldon 11-15 决策卡：圗兾凢来 不并码位归一、保留异体刻形、改流水线放行；SJ 11-16 请求，A22 草稿）：
-# lane_variant_guard 本要以 cand_variant 拦、variant_norm 也不放时，cv 再调 variant_rank。
-# 参校本字（char）的异体只排库第 2 名以后时放行，放行字＝char（参校本字）；异体是本格现字（名次 0）或库首位（名次 1）照旧送审。
-# cv 自动记证据 lane.variant_rank="hook"、lane.variant_from、lane.variant_ranks=[[名次, 异体, cov], …]。
+# variant_rank（k17，11-16）：Sheldon 11-15 定 圗兾凢来 不并码位、改流水线放行；11-16 定文字层照刻形写。
+# 要 cv 带 #1573（v0.7.43）。A22 刻形版：库里异体排在参校本字之前才放、放刻形 form；否则送审。
+# 取代 variant_rank_patch.py（Sheldon 11-16：圗兾凢来 文字层照刻形写）。A22 核过 cv 侧：返回 form 时 same(form, char) 成立（两形本就是 variants 异体对），
+# cv 放行字＝form，证据 lane.variant_rank=hook、variant_from、variant_ranks 照记。
 
-#: 只对这些字放（键＝参校本字，值＝允许的异体）；空 dict＝不限字。先按 Sheldon 定的四对开，要扩再看图。
 RANK_PAIRS = {
     "圖": {"圗"}, "冀": {"兾"}, "凡": {"凢"}, "來": {"来"},
 }
 
 
 def variant_rank(*, lane, char, forms, cur, cands, lib):
-    if not forms or any(r <= 1 for r, _, _ in forms):
-        return None                     # 异体是现字或库首位：图上多半就是异体，不放
-    if RANK_PAIRS:
-        ok = RANK_PAIRS.get(char, set())
-        if not all(f in ok for _, f, _ in forms):
-            return None
+    """放刻形 form：只在库里这个异体排在参校本字 char 前面（或 char 不在库前几名）时放；否则送审，不猜。"""
+    ok = RANK_PAIRS.get(char, set())
+    hits = [(r, f) for r, f, _ in forms if r >= 1 and f in ok]      # 只看库名次；现字（名次 0）不算证据
+    if not hits:
+        return None
+    r, f = min(hits)                                                 # 排最前的那个异体
+    r_char = next((i for i, (c, _) in enumerate(cands, 1) if c == char), None)
+    if r_char is not None and r_char < r:
+        return None                                                  # 库认参校本字比认刻形更像：别写异体
     if lib and lib in LOOKALIKE.get(char, set()):
-        return None                     # 库首位是形近不同字（LOOKALIKE 已在本模块）
-    return char
+        return None
+    return f
