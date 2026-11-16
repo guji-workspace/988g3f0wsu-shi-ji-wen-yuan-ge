@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "10",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.48",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "border_detect",
+    "to": null
+  },
+  "base": "cv0.7.46-c9-g22-m2-k20-job4601",
+  "why": "SJ r73：cv v0.7.48（史記 patch 线，#1590 table_cols、#1594）、书仓 k21、g22、语料总号 9；切分线册配置 rev 1023323（table_cols、period_prior、vline_overrides）、钉子 rev 1023326；中心库 rev 1023533；接现役 main 包 cv0.7.46-c9-g22-m2-k20-job4601；整册 border_detect 起（status：vline_overrides／table_pages 参数变）。"
+}
