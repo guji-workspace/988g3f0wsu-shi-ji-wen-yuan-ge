@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "13",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.55",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.50-c9-g22-m2-k22-job4760",
+  "why": "SJ r76：cv v0.7.55＋书仓 k23（c44500e）＋g22＋语料总号 10（A23 PUA 换字）；中心库 rev 1036361（含切分线 65 列钉子＋现有人裁）；接现役 main 包 cv0.7.50-c9-g22-m2-k22-job4760；钉子册整册 row_segment 起；不带 near_knn／k-lai／cut_gap_guard。"
+}
