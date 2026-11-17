@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "05",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.59",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.57-c10-g23-m2-k24-job5052",
+  "why": "SJ r79（切分主轮）：cv v0.7.59（史记线＝v0.7.57＋#1632 cut_gap_keep_glyph／cut_white_row／straight_seam_ink）＋书仓 k25（三个开关开）＋g23＋语料 10；中心库 rev 1039116；接 r78 main 包 cv0.7.57-c10-g23-m2-k24-job5052；全书 row_segment 起；人裁迁移不开 GUJI_ALLOW_LOST_HUMAN。"
+}
