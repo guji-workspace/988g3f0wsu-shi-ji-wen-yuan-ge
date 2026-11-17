@@ -739,6 +739,50 @@ def equal_cuts(prof: np.ndarray, n: int) -> list[int]:
     return cuts[::-1]
 
 
+#: 题署列等分切点挪到字间白缝（k24，2026-11-17，SJ r77）：在切点上下 VALLEY_WIN × 均匀字距内找（近乎）白行
+#: （墨点 ≤ VALLEY_WHITE），原位墨点比它多 VALLEY_MIN_GAIN 以上才挪，挪到离原位最近那段白行的正中。
+#: 只认白行、不认「墨最少的行」：字字相粘的密排题署（01:107:7 列傳第四）墨最少处常在字内，挪过去反而劈字。
+VALLEY_WIN = 0.3
+VALLEY_MIN_GAIN = 3
+VALLEY_WHITE = 2
+
+
+def valley_snap(row_ink: np.ndarray, cuts: list[int]) -> list[int]:
+    """`equal_cuts` 的切点（[0, …, L]）逐条挪到附近字间白缝，首尾不动、次序不乱；附近没有白行就不动。
+
+    题署列（「史記卷N」「宋中郎外兵曹參軍裴駰集解」）字距不匀、中间常有大段空白，
+    等分 DP 的段长罚把切点拉在字腰上（01:43:5 偏 42 像素、21:2:4、30:2:7，r76 审计）；
+    这里只在切点附近找更白的行，不改段数。"""
+    n = len(cuts) - 1
+    L = cuts[-1]
+    if n <= 1 or L <= 0:
+        return cuts
+    w = max(1, int(VALLEY_WIN * L / n))
+    out = list(cuts)
+    for i in range(1, n):
+        c = cuts[i]
+        lo = max(out[i - 1] + 1, c - w)
+        hi = min(cuts[i + 1] - 1, c + w)
+        if hi <= lo or not 0 <= c < L:
+            continue
+        win = row_ink[lo:hi + 1]
+        if int(row_ink[min(c, L - 1)]) - VALLEY_WHITE < VALLEY_MIN_GAIN:
+            continue
+        rows = np.nonzero(win <= VALLEY_WHITE)[0] + lo
+        if not len(rows):
+            continue
+        # 连成段，取离原位最近的一段的正中
+        runs, a = [], rows[0]
+        for p, q in zip(rows, rows[1:]):
+            if q != p + 1:
+                runs.append((a, p))
+                a = q
+        runs.append((a, rows[-1]))
+        a, b = min(runs, key=lambda r: 0 if r[0] <= c <= r[1] else min(abs(r[0] - c), abs(r[1] - c)))
+        out[i] = int((a + b + 1) // 2)
+    return out
+
+
 def _tight_item(ink: np.ndarray, y0: int, y1: int) -> RosterItem | None:
     sub = ink[y0:y1]
     ys, xs = np.nonzero(sub)
@@ -748,10 +792,12 @@ def _tight_item(ink: np.ndarray, y0: int, y1: int) -> RosterItem | None:
                       x1=int(xs.max() + 1))
 
 
-def _resplit(ink: np.ndarray, y0: int, y1: int, n: int) -> list[RosterItem] | None:
+def _resplit(ink: np.ndarray, y0: int, y1: int, n: int, valley: bool = False) -> list[RosterItem] | None:
     if y1 - y0 < n * 4:
         return None
     cuts = equal_cuts(_profile(ink, y0, y1), n)
+    if valley:
+        cuts = valley_snap(ink[y0:y1].sum(axis=1).astype(np.int64), cuts)
     out = [_tight_item(ink, y0 + a, y0 + b) for a, b in zip(cuts, cuts[1:])]
     return None if any(it is None for it in out) else out  # type: ignore[return-value]
 
@@ -868,7 +914,7 @@ def refit_column(rc: RosterColumn, ink: np.ndarray, ref_line: str,
     if len(spec) == 1:                          # 整列普通字：全列等分
         if len(rc.items) == spec[0] and all_char:
             return False
-        got = _resplit(ink, top, bottom, spec[0])
+        got = _resplit(ink, top, bottom, spec[0], valley=True)
         if all_char and abs(len(rc.items) - spec[0]) == 1:
             # 几何块只差整理本一字（题署列 07:2:5、10:2:6：两字粘成一块或一字劈成两块）：再按块凑一版，
             # 切线压在几何块腰上的条数（`_cuts_in_blocks`）比等分少 FIT_MARGIN 条以上才用，否则照旧等分。题署列中间有大段空白（「學」与「士」之间）时

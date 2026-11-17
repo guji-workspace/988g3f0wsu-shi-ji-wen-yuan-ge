@@ -23,6 +23,8 @@ params:
   row_segment:
     cut_judge: unet_f64        # 切点判官 torch 双精度（同 det_warp）；k11 从中心库 book_defaults 挪来
     snap_cut: 0.4              # 格线劈字修法（cv #1490，v0.7.25 起）：42 册强档劈字 49→0、中档 247→122（A22 11-13）
+    cut_gap_guard: 0.08        # 格线劈上字伸出的戈钩／长捺：改选零墨缝（cv #1606，A22 11-17；k24 起，要 cv ≥0.7.57）
+    cut_free_seam: 0.35        # 零墨折线候选，只修墨大半在上格的块（cv #1624，A22 11-17：42 册 82 页切坏 72→54、新劈 0；k24 起）
     row_pitch: free
     layout_slots_grow: true    # 双行小注列 22–24 行时按实际行数放格（cv #870）
     layout_gap_cols_empty: true
