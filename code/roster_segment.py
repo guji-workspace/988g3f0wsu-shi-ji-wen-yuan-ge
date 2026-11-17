@@ -739,14 +739,16 @@ def equal_cuts(prof: np.ndarray, n: int) -> list[int]:
     return cuts[::-1]
 
 
-#: 题署列等分切点挪到墨谷（k24，2026-11-17，SJ r77）：在切点上下 VALLEY_WIN × 均匀字距内找墨最少的行，
-#: 比原位少 VALLEY_MIN_GAIN 个墨点以上才挪；墨最少的行有好几行（整段白行）时取离原位最近那段白行的正中。
+#: 题署列等分切点挪到字间白缝（k24，2026-11-17，SJ r77）：在切点上下 VALLEY_WIN × 均匀字距内找（近乎）白行
+#: （墨点 ≤ VALLEY_WHITE），原位墨点比它多 VALLEY_MIN_GAIN 以上才挪，挪到离原位最近那段白行的正中。
+#: 只认白行、不认「墨最少的行」：字字相粘的密排题署（01:107:7 列傳第四）墨最少处常在字内，挪过去反而劈字。
 VALLEY_WIN = 0.3
 VALLEY_MIN_GAIN = 3
+VALLEY_WHITE = 2
 
 
 def valley_snap(row_ink: np.ndarray, cuts: list[int]) -> list[int]:
-    """`equal_cuts` 的切点（[0, …, L]）逐条挪到附近墨谷，首尾不动、次序不乱。
+    """`equal_cuts` 的切点（[0, …, L]）逐条挪到附近字间白缝，首尾不动、次序不乱；附近没有白行就不动。
 
     题署列（「史記卷N」「宋中郎外兵曹參軍裴駰集解」）字距不匀、中间常有大段空白，
     等分 DP 的段长罚把切点拉在字腰上（01:43:5 偏 42 像素、21:2:4、30:2:7，r76 审计）；
@@ -764,10 +766,11 @@ def valley_snap(row_ink: np.ndarray, cuts: list[int]) -> list[int]:
         if hi <= lo or not 0 <= c < L:
             continue
         win = row_ink[lo:hi + 1]
-        m = int(win.min())
-        if int(row_ink[min(c, L - 1)]) - m < VALLEY_MIN_GAIN:
+        if int(row_ink[min(c, L - 1)]) - VALLEY_WHITE < VALLEY_MIN_GAIN:
             continue
-        rows = np.nonzero(win == m)[0] + lo
+        rows = np.nonzero(win <= VALLEY_WHITE)[0] + lo
+        if not len(rows):
+            continue
         # 连成段，取离原位最近的一段的正中
         runs, a = [], rows[0]
         for p, q in zip(rows, rows[1:]):

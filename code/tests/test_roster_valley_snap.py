@@ -13,9 +13,16 @@ def test_cut_moves_to_white_gap():
     assert SJ.valley_snap(ink, [0, 100, 300]) == [0, 130, 300]
 
 
-def test_small_gain_keeps_cut():
+def test_no_white_row_keeps_cut():
     ink = np.full(300, 20, dtype=np.int64)
-    ink[110:115] = 18                    # 只比原位少 2 个墨点：不挪
+    ink[110:115] = 5                     # 墨少但不白（字字相粘，墨谷可能在字内）：不挪
+    assert SJ.valley_snap(ink, [0, 100, 300]) == [0, 100, 300]
+
+
+def test_light_cut_keeps():
+    ink = np.full(300, 20, dtype=np.int64)
+    ink[98:103] = 4                      # 原位只比白行多 2 个墨点：不挪
+    ink[120:140] = 0
     assert SJ.valley_snap(ink, [0, 100, 300]) == [0, 100, 300]
 
 
