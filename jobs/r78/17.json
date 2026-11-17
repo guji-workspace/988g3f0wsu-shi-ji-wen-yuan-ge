@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "17",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.57",
+  "pipeline": "keben_body_v2",
+  "pages": "161",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.57-c10-g23-m2-k24-job5064",
+  "why": "SJ r78 钉子页级小轮：cv v0.7.57＋k24＋g23＋语料 10；中心库 rev 1038418（切分线 r78 钉子）；接 r77 main 包 cv0.7.57-c10-g23-m2-k24-job5064；p161 从 row_segment 起。"
+}
