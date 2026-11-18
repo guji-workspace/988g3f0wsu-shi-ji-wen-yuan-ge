@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "26",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.59",
+  "pipeline": "keben_body_v2",
+  "pages": "137",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.59-c10-g23-m2-k25-job5130-a4",
+  "why": "SJ r79 钉子页级小轮：cv v0.7.59＋k25＋g23＋语料 10；中心库 rev 1071073（v0.1 切分 84 格清查新钉 26:137:2、28:88:3、42:84:8）；接 r79 包 cv0.7.59-c10-g23-m2-k25-job5130-a4；p137 从 row_segment 起。"
+}
