@@ -1,8 +1,8 @@
 {
- "digest": "26426374bcf1caf677ccd8386d694c223327d5735ab4384899fefb4d77a75ff7",
+ "digest": "9e9f31c677519ce9ee720d9f24f7a80fbbdb0bad2c6249a583f86467e3a90e46",
  "files": {
   "README.md": "420d1a95cdb8f0871f80397759c8aabf4ef667765fd6f4da0dc8774812d1061a",
-  "code.yaml": "7ef2786d68baef98d6a65afb90c1d4f04ff19923e1559476a7650e6207edfe0a",
+  "code.yaml": "506c5bff5cac1da2bbc306ae053e44a4e626ab39225f8f371874a284122f8e1e",
   "defaults.yaml": "d2e13b81c3e4f03d83480838fdcb4d32f622d04787548bd520c43479370c6243",
   "equiv.yaml": "d78aca3d36efcd001355a0a9d3dbe45c190280b918e8cd76468a2dd7cc90774c",
   "follow_ref_rival.py": "c99347982d51161d7b2c241c73b690073d57ac2f19609a58240f8428e677b638",
@@ -24,6 +24,6 @@
   "tests/test_shiji_roster_ref.py": "3aa4e61d8c27f903b231772d1d0f0b116be6a0471786d7e5985fdd39142ed065"
  },
  "k": 26,
- "note": "k26（11-17 r80）：cv>=0.7.61；defaults row_segment 开 cut_glyph_line 0.35（cv #1638，103 页切坏线 105→77、新劈 0）",
- "tested_cv": "0.7.61"
+ "note": "k26（11-18 r80）：cv>=0.7.62（史記线 v0.7.61＋#1617/#1635 清边）；defaults row_segment 开 cut_glyph_line 0.35（cv #1638，103 页切坏线 105→77、新劈 0）",
+ "tested_cv": "0.7.62"
 }
