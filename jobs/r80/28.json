@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "28",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.62",
+  "pipeline": "keben_body_v2",
+  "pages": "all",
+  "steps": {
+    "from": "row_segment",
+    "to": null
+  },
+  "base": "cv0.7.59-c10-g23-m2-k25-job5132-a3",
+  "why": "SJ r80（切分主轮）：cv v0.7.62（史记线＝v0.7.61 cut_glyph_line＋#1617/#1635 清边）＋书仓 k26（cut_glyph_line 0.35 开、auto_backfill 关）＋g26（glyph-2bd6ff116a4236ef）＋语料 10；中心库 rev 1107962（含题署 1071065、84 格 1071073、补钉 1071320、42:49:6／42:23:4 切线指定 1073682、29:38:7 切线指定 1073910）；接 r79 main 包 cv0.7.59-c10-g23-m2-k25-job5132-a3；全书 row_segment 起；人裁迁移不开 GUJI_ALLOW_LOST_HUMAN。"
+}
