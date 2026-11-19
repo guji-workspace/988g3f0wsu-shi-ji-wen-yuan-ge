@@ -25,9 +25,6 @@ params:
     snap_cut: 0.4              # 格线劈字修法（cv #1490，v0.7.25 起）：42 册强档劈字 49→0、中档 247→122（A22 11-13）
     cut_gap_guard: 0.08        # 格线劈上字伸出的戈钩／长捺：改选零墨缝（cv #1606，A22 11-17；k24 起，要 cv ≥0.7.57）
     cut_free_seam: 0.35        # 零墨折线候选，只修墨大半在上格的块（cv #1624，A22 11-17：42 册 82 页切坏 72→54、新劈 0；k24 起）
-    cut_gap_keep_glyph: true   # cut_gap_guard 换过去的线不许劈开原线没劈的字（戈钩内侧白走廊，代/或/實；cv #1632，A22 11-17；k25 起，要 cv ≥0.7.59）
-    cut_white_row: 0.35        # 仍劈字时挪到 ±0.35 格内最近的整行白，护字内白缝（cv #1632；k25 起）
-    straight_seam_ink: true    # 直线候选 seam_ink 记真墨，只是记录（cv #1632；k25 起）
     row_pitch: free
     layout_slots_grow: true    # 双行小注列 22–24 行时按实际行数放格（cv #870）
     layout_gap_cols_empty: true
