@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "21",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.59",
+  "pipeline": "keben_body_v2",
+  "pages": "18,19",
+  "steps": {
+    "from": "page_survey",
+    "to": null
+  },
+  "base": "cv0.7.59-c10-g23-m2-k25-job5772",
+  "why": "SJ v0.1.x 补跑：拆叶 21:18,19 换 A31 页表 r002 新图后 page_survey／invert_detect 过期（#5772 从 border_detect 起漏了前两步），从 page_survey 起重跑；cv v0.7.59＋k25＋g23＋语料 10；接 #5772 包"
+}
