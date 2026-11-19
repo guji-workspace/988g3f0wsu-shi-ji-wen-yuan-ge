@@ -1,0 +1,15 @@
+{
+  "kind": "rerun",
+  "book": "19",
+  "ws_glob": "988g3f0wsu-*",
+  "ws_repo": "guji-workspace/988g3f0wsu-shi-ji-wen-yuan-ge",
+  "cv": "v0.7.59",
+  "pipeline": "keben_body_v2",
+  "pages": "58,59,61",
+  "steps": {
+    "from": "border_detect",
+    "to": null
+  },
+  "base": "cv0.7.59-c10-g23-m2-k25-job5123-a2",
+  "why": "SJ v0.1.x 页级小轮：cv v0.7.59＋k25＋g23＋语料 10；中心库 rev 1147775（稀疏页列钉 19 列）＋A31 页表 r002（19–21 拆叶错位修）；接 v0.1 包 cv0.7.59-c10-g23-m2-k25-job5123-a2；p58,59,61 从 border_detect 起；拆叶 6 页旧格号旧人裁作废"
+}

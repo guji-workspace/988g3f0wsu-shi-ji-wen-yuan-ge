@@ -28,7 +28,6 @@ params:
     cut_gap_keep_glyph: true   # cut_gap_guard 换过去的线不许劈开原线没劈的字（戈钩内侧白走廊，代/或/實；cv #1632，A22 11-17；k25 起，要 cv ≥0.7.59）
     cut_white_row: 0.35        # 仍劈字时挪到 ±0.35 格内最近的整行白，护字内白缝（cv #1632；k25 起）
     straight_seam_ink: true    # 直线候选 seam_ink 记真墨，只是记录（cv #1632；k25 起）
-    cut_glyph_line: 0.35       # 上下字交错按连通块归属逐列画线（cv #1638，SJ 切分线 11-17：103 页切坏线 105→77、新劈 0；k26 起，要 cv ≥0.7.61）
     row_pitch: free
     layout_slots_grow: true    # 双行小注列 22–24 行时按实际行数放格（cv #870）
     layout_gap_cols_empty: true
