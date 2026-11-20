@@ -65,3 +65,47 @@ def test_variant_rank_writes_carved_form():
     assert _rank("圖", [(0, "圗", None)]) is None                                     # 现字不算证据
     assert _rank("說", [(2, "説", 0.94)], cands=["訛", "説"], lib="訛") is None        # 不在四对里
     assert _rank("凡", [(2, "凢", 0.94)], cands=["几", "凢"], lib="几") is None        # 库首位是形近不同字
+
+
+def _rank(char, forms, cands=(), cur=None, lib=None):
+    return m.variant_rank(lane="witness3", char=char, forms=tuple(forms), cur=cur,
+                          cands=tuple((c, 0.9) for c in cands), lib=lib)
+
+
+def test_variant_rank_writes_carved_form():
+    """k17／k27 variant_rank 刻形版：库里异体排在参校本字前才放，放异体。"""
+    assert _rank("冀", [(2, "兾", 0.93)], cands=["翼", "兾", "冀"], lib="翼") == "兾"
+    assert _rank("冀", [(2, "兾", 0.93)], cands=["翼", "兾"], lib="翼") == "兾"
+    assert _rank("圖", [(3, "圗", 0.95)], cands=["圓", "圖", "圗"], lib="圓") is None
+    assert _rank("圖", [(1, "圗", 0.98)], cands=["圗", "圖"], lib="圗") == "圗"
+    assert _rank("圖", [(0, "圗", None)]) is None
+    assert _rank("說", [(2, "説", 0.94)], cands=["訛", "説"], lib="訛") is None
+    assert _rank("凡", [(2, "凢", 0.94)], cands=["几", "凢"], lib="几") is None
+
+
+def test_k27_new_rank_pairs():
+    """k27：卷→巻、彊→疆（图为刻形异体）；库首位是形近字则不放。"""
+    assert _rank("卷", [(1, "巻", 0.95)], cands=["巻", "卷"], lib="巻") == "巻"
+    assert _rank("彊", [(2, "疆", 0.93)], cands=["殭", "疆", "彊"], lib="殭") == "疆"
+    assert _rank("卷", [(3, "巻", 0.9)], cands=["券", "卷", "巻"], lib="券") is None   # 卷排在巻前：送审
+
+
+def test_lai_margin():
+    """k23：来/來 写 来 须来分高出 0.02。"""
+    cands = [("来", 0.95), ("來", 0.90)]
+    assert m.variant_rank(lane="witness3", char="來", forms=((1, "来", 0.95),), cur=None, cands=tuple(cands), lib=None) == "来"
+    close = [("来", 0.91), ("來", 0.90)]
+    assert m.variant_rank(lane="witness3", char="來", forms=((1, "来", 0.91),), cur=None, cands=tuple(close), lib=None) is None
+
+
+def test_k27_lookalike_blocks():
+    assert _rank("曠", [(1, "壙", 0.9)], cands=["壙", "曠"], lib="壙") is None          # 不在 RANK_PAIRS，常规
+    assert m.variant_norm(lane="witness3", char="曠", form="曠", canon=lambda c: c, lib="壙") is None
+
+
+def test_keep_cur_both_directions():
+    """A24 11-20：取消归一后 lane 通道放整理本变体。方向一 cur 变体、char 目标；方向二 char 变体、forms 含目标。"""
+    assert _rank("明", [], cur="眀", lib="明") == "眀"                                   # 方向一
+    assert _rank("明", [], cur="眀", lib="朋") is None                                   # 形近黑名单
+    assert _rank("莭", [(2, "節", 0.9, )], cur="卽", lib="卽") == "莭"                   # 方向二（37:225:5:9）
+    assert _rank("莭", [], cur="卽", lib="卽") is None                                   # forms 里没目标字不放
