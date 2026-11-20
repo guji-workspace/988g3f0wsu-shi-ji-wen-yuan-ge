@@ -11,3 +11,11 @@ id: 988g3f0wsu   # 工作区 id＝book ID（2026-10-28 起；短 id 长期会冲
 glyph_lib:
   auto_backfill: false
   text_check: report
+
+# 2026-11-20 收轮检查（guji-manager v0.4.69 roundcheck）待审分层口径（总览同意）：
+# 判序 seg→group→lib（与全唐文 cls36 同序，三书可比）；层号仍按史记四层法叫：1 切分、2 库缺样本、3 形近字组、4 其余。
+round_check:
+  order: [seg, group, lib]
+  cov_min: 0.90
+  lib_min: 5
+  seg_defect: false
