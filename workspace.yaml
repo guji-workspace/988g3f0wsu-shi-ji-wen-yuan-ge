@@ -18,4 +18,4 @@ round_check:
   order: [seg, group, lib]
   cov_min: 0.90
   lib_min: 5
-  seg_defect: false
+  seg_defect: true           # 11-20 试点 #5942：关着时 r80 两处已知真错（42:137:4、42:28:3，CLIP）漏报；r80 本地闸是开着的
