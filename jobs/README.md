@@ -11,29 +11,29 @@
 - 换包落 book-text 过 R1 闸（manager ≥0.4.38）：字形库刻例的格键在新包里找不到就停。格号变动大（切分改动、增删格）的一轮，标 main／落 book-text 前先核字形库刻例格键与新包对得上。改字形库钉号用 book_overrides.glyph_pin、从 glyph_match 起，不改册 yaml。
 - 设计人审记账、book-text 导出、出单等新流程前，先读总纲 guji-manager doc/00-总览/待审单-人裁事件-book-text格子.md（#449，Sheldon 11-10：所有设计围绕这三样）：book-text 格子＝现状（只录首选字），待审单＝问题（中心库 feedback/lists/proofing，整张重出、改单不动 book-text），人裁事件＝答案（只追加，靠锚重绑，机器不改）。
 
-## 直接交单：怎么拿令牌、怎么交（2026-11-10 实测通过，SJ 线程）
-令牌（JOBSDB_TOKEN／JOBSDB_PASSWORD）在加密仓 sheldonlidev/guji-dev-secret 里，本容器只需要环境变量 `SECRETS_AGE_KEY`（Default 环境已配，不用另设）。**令牌不要打印、不要写进聊天／文档／提交。**
+## 直接交单（2026-11-23 改：任务库在 Cloudflare D1）
+任务库 11-23 起在 Cloudflare D1（`guji-jobs`），Neon、wss 桥（relay.open-guji.com/jobsdb）、旧美国机 Postgres 都不再用。**令牌只用 `JOBSDB_TOKEN`，别设 `JOBSDB_URL`**；也不再需要 `GUJI_REQUIRE_JOBSDB`。令牌不要打印、不要写进聊天／文档／提交。
 
-1. 解密载入（Default 环境已装钩子 `/etc/guji_secrets.sh`，缓存 60 分钟到 `~/.guji_secrets.env`，权限 600）：
-   - 先 `add_repo` 密钥仓 `sheldonlidev/guji-dev-secret`，克隆到 `/home/user/guji-dev-secret`（钩子认这个路径；钩子自己取不到仓时才需要手动克隆）。
-   - 然后 `. /etc/guji_secrets.sh`，用 `[ -n "$JOBSDB_TOKEN" ] && echo set` 核对（只看是否 set，别 echo 值）。
-   - 没有钩子时：`GUJI_SECRETS_DIR=/home/user/guji-dev-secret . /home/user/guji-dev-secret/bootstrap.sh`，或 `eval "$(python3 /home/user/guji-dev-secret/gsecrets.py export --names JOBSDB_TOKEN,JOBSDB_PASSWORD)"`。
-2. 装命令（容器里没有预装 `guji_jobs` 时）：`python3 -m venv /tmp/gj && /tmp/gj/bin/pip install -q -e <guji-manager 检出> -e <open-guji-cv 检出> websockets "psycopg[binary]"`。guji-manager 要用 main（add_repo open-guji/guji-manager）；open-guji-cv 是公开仓，`GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 -b dev` 即可。**两个都要装**，缺 cv 时 dry-run 会因 `open_guji_cv` 导入失败而崩。
+1. 载入令牌：`eval "$(python3 /home/user/guji-dev-secret/gsecrets.py export)"`（先 `add_repo` 密钥仓 `sheldonlidev/guji-dev-secret`，克隆到 `/home/user/guji-dev-secret`），用 `[ -n "$JOBSDB_TOKEN" ] && echo set` 核对，只看是否 set。
+2. 版本：guji-manager 用正式 tag ≥0.6.2（0.6.1 标 main 必挂）；史記仍在 cv 0.7.x patch 线，**不能用 `guji pipeline <命令>` 五步前缀（要 cv ≥0.9.0）**，一律用下面的老写法。manager 0.6 配 cv 0.7.x 不会被拦。
 3. 交单（在书仓根）：
    ```
-   . /etc/guji_secrets.sh
-   export GUJI_JOBS_WHO=SJ-<线程名> GUJI_REQUIRE_JOBSDB=1   # GUJI_REQUIRE_JOBSDB=1：没令牌就报错，不退回旧 Neon 库
-   /tmp/gj/bin/python -m guji_manager.jobs workers           # 看执行方在线情况
-   /tmp/gj/bin/python -m guji_manager.jobs ls --book 988g3f0wsu
-   /tmp/gj/bin/python -m guji_manager.jobs submit jobs/rN/NN.json --dry-run   # 先 dry-run，输出规整后定义和指纹
-   /tmp/gj/bin/python -m guji_manager.jobs submit jobs/rN/NN.json             # 真交
-   /tmp/gj/bin/python -m guji_manager.jobs show <号> / wait <号>
+   export GUJI_JOBS_WHO=SJ-batch          # 收尾通知按这个登记名送；会话换了要重登 register.py SJ-batch --account a
+   guji job precheck --books 01-42 --cv <ver> --code <k> --glyph-pin <g> --corpus <n>   # 逐册生效钉子，不一致退出 1
+   guji job workers                        # 看执行方在线
+   guji job ls --book-id 988g3f0wsu
+   guji job submit --book 15 --book-id 988g3f0wsu --cv <ver> --pipeline keben_body_v2 \
+       --from <步> --pages all --base <带 jobNNNN 的 main 包标签> --change <改动名> --priority 50 --dry-run   # 先 dry-run
+   guji job submit …（去掉 --dry-run 真交）
+   guji job show <号> / wait <号> / retry <号> / stats --book-id 988g3f0wsu
    ```
-4. 注意：
-   - 连的是新库 `wss://relay.open-guji.com/jobsdb`；没设 JOBSDB_TOKEN 会连旧 Neon，单永远没人领。
-   - 判重指纹只算 spec 文本；中心库配置变了 spec 不变会被判 duplicate，再交加 `--again`。dry-run 若提示"取不到中心库 rev"，说明少装了 cv 或没连上中心库，别忽略。
-   - spec 里 `cv` 必须是远端分支／提交，`ws_repo` 写本书仓；base 用带 jobNNNN 的完整标签。
+4. 收轮与标 main：`guji round-check <册> --pack <候选> --ledger auto --ledger-book 史記 --set seg_defect=true`（或交 `--kind roundcheck` 单）；存包 `guji products pack push`，标 main `guji products pack promote`（manager ≥0.6.2）；落文本 `guji collect … --no-ai`。
+5. 注意：
+   - 整书轮一律显式 `--pages all`（`--pages auto` 缺省已关）；逐册 `--book` 交。
+   - 判重指纹只算 spec 文本；中心库配置变了 spec 不变会被判 duplicate，再交加 `--again`。
+   - `--cv` 必须是正式 tag；`ws_repo` 写本书仓；base 用带 jobNNNN 的完整标签。
    - 任务库不做：标 main、覆盖正式产物、推册配置——这些仍按总览规矩手动做。
+   - 11-22 已删 `release`、`deploy`、`batch`、`label-batch`、`cards`、`store`（store 改 `guji db push`）。
 
 ## k1→k2 切换记录（2026-11-10，r32）
 - 内容：row_segment 四个书级开关（seal_inkcut、seal_gap_slots_empty、jiazhu_free_split、jiazhu_step_split）从 cv 删掉，实现搬进书仓 code/（seal_ink.py、jiazhu_step.free_split），出 k2（PR #1，合并提交 a8c78ac 打 tag k2）。
