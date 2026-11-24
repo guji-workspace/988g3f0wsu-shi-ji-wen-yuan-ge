@@ -64,7 +64,37 @@ LOOKALIKE = {
     "揚": {"楊"}, "扬": {"楊"},
     "邊": {"遏", "退"}, "邉": {"遏", "退"},
     "關": {"閱", "閻"}, "闗": {"閱", "閻"}, "関": {"閱", "閻"},
+    # k27（v0.2，11-20）：71 对异体类里「图确为整理本字、库首位是另一个形近字」的 11 对，库首位是这些字时不放，维持送审
+    "曠": {"壙"}, "齡": {"軨"}, "擔": {"檐"}, "祖": {"徂"}, "悦": {"税"}, "惟": {"帷"},
+    "塼": {"摶"}, "矯": {"撟"}, "穰": {"禳"}, "蓋": {"盍"}, "渚": {"陼"},
 }
+
+#: 放刻形（k17 起）：整理本字 → 允许的刻形异体。库里该异体排在整理本字前才放、放刻形，否则送审。
+#: k27 加 卷→巻（27:110:1:4、37:176:1:4、40:102:1:4 图为巻）、彊→疆（37:110:8:4 图为疆）。
+RANK_PAIRS = {"圖": {"圗"}, "冀": {"兾"}, "凡": {"凢"}, "來": {"来"}, "卷": {"巻"}, "彊": {"疆"}}
+#: 来/來 的库分只差 ≤0.01、名次是噪声（k23，A24 11-17）：写 来 须来分 ≥ 來分 + MARGIN_LAI。
+MARGIN_LAI = 0.02
+
+#: 取消码位归一后（v0.2 codepoints 取消 23 条）lane 通道放整理本变体（刻形）。变体 → 目标字。A24 11-20。
+KEEP_CUR = {
+    "眀": "明", "䏻": "能", "邉": "邊", "乆": "久", "椘": "楚", "戶": "户", "賛": "贊", "莭": "節", "噐": "器", "䜛": "讒",
+    "廹": "迫", "眞": "真", "耻": "恥", "宼": "寇", "㓂": "寇", "靁": "雷", "挟": "挾", "冝": "宜", "㪚": "散", "甪": "角",
+    "仟": "阡", "旍": "旌", "𡙇": "缺",
+}
+
+
+def _keep_cur(char, cur, lib, forms=()):
+    # 方向二（37:225:5:9）：放行字 char 本身就是整理本变体（莭），cur 是库首位（卽），目标字（節）只在 forms 里 → 放 char（刻形）
+    if char in KEEP_CUR and any(f == KEEP_CUR[char] for _, f, _ in forms):
+        if lib and lib in LOOKALIKE.get(char, set()) | LOOKALIKE.get(KEEP_CUR[char], set()):
+            return None
+        return char
+    # 方向一：cur（整理本字）是变体、char 是它的目标字 → 放 cur
+    if cur and KEEP_CUR.get(cur) == char and cur != char:
+        if lib and lib in LOOKALIKE.get(cur, set()) | LOOKALIKE.get(char, set()):
+            return None
+        return cur
+    return None
 
 
 def variant_norm(*, lane, char, form, canon, lib):
@@ -79,26 +109,29 @@ def variant_norm(*, lane, char, form, canon, lib):
     return c
 
 
-# variant_rank（k17，11-16）：Sheldon 11-15 定 圗兾凢来 不并码位、改流水线放行；11-16 定文字层照刻形写。
+# variant_rank（k17，11-16；k27 扩 RANK_PAIRS、加 来/來 margin 与 keep_cur，见上面表与函数）：Sheldon 11-15 定 圗兾凢来 不并码位、改流水线放行；11-16 定文字层照刻形写。
 # 要 cv 带 #1573（v0.7.43）。A22 刻形版：库里异体排在参校本字之前才放、放刻形 form；否则送审。
 # 取代 variant_rank_patch.py（Sheldon 11-16：圗兾凢来 文字层照刻形写）。A22 核过 cv 侧：返回 form 时 same(form, char) 成立（两形本就是 variants 异体对），
 # cv 放行字＝form，证据 lane.variant_rank=hook、variant_from、variant_ranks 照记。
 
-RANK_PAIRS = {
-    "圖": {"圗"}, "冀": {"兾"}, "凡": {"凢"}, "來": {"来"},
-}
-
-
 def variant_rank(*, lane, char, forms, cur, cands, lib):
     """放刻形 form：只在库里这个异体排在参校本字 char 前面（或 char 不在库前几名）时放；否则送审，不猜。"""
+    r0 = _keep_cur(char, cur, lib, forms)
+    if r0 is not None:
+        return r0
     ok = RANK_PAIRS.get(char, set())
     hits = [(r, f) for r, f, _ in forms if r >= 1 and f in ok]      # 只看库名次；现字（名次 0）不算证据
     if not hits:
         return None
     r, f = min(hits)                                                 # 排最前的那个异体
-    r_char = next((i for i, (c, _) in enumerate(cands, 1) if c == char), None)
-    if r_char is not None and r_char < r:
-        return None                                                  # 库认参校本字比认刻形更像：别写异体
+    sc = {c: v for c, v in cands}
+    if char == "來":                                                 # 只对 来/來 加 margin（k23）
+        if char not in sc or f not in sc or sc[f] < sc[char] + MARGIN_LAI:
+            return None
+    else:
+        r_char = next((i for i, (c, _) in enumerate(cands, 1) if c == char), None)
+        if r_char is not None and r_char < r:
+            return None                                              # 库认参校本字比认刻形更像：别写异体
     if lib and lib in LOOKALIKE.get(char, set()):
         return None
     return f
